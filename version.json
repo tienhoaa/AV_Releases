@@ -1,9 +1,9 @@
 {
-  "version": "1.0.1",
-  "release_date": "2026-11-08",
+  "version": "1.0.2",
+  "release_date": "2026-11-09",
   "download_url": "https://github.com/tienhoaa/AV_Releases/releases/download/v1.0.1/AVTools_latest.zip",
   "url": "https://github.com/tienhoaa/AV_Releases/releases/download/v1.0.1/AVTools_latest.zip",
-  "changelog": "Phiên bản v1.0.1: Bổ sung công cụ AV_GetKey độc lập, tối ưu giao diện và cập nhật tự động.",
-  "notes": "Phiên bản v1.0.1: Bổ sung công cụ AV_GetKey độc lập, tối ưu giao diện và cập nhật tự động.",
-  "sha256": "11dd5fe1ab87c2dfbfe1ce66c8179ce27a864f4bb717210dfc849f887c66b625"
+  "changelog": "Phiên bản v1.0.2: Tích hợp tính năng Bật/Tắt Module & Ribbon Tab theo chuyên môn, tối ưu giao diện.",
+  "notes": "Phiên bản v1.0.2: Tích hợp tính năng Bật/Tắt Module & Ribbon Tab theo chuyên môn, tối ưu giao diện.",
+  "sha256": "d64d74963ad5f896c863b3e5ac9432ce716bbc8ac910565f4a5fdda9b7691f86"
 }
