@@ -551,16 +551,12 @@
               <span>Đồng Bộ GitHub</span>
             </button>
 
-            <button type="button" onclick="exportLicensesBackup()" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-xl border border-slate-700 flex items-center gap-1.5 whitespace-nowrap transition">
-              <i data-lucide="download" class="w-3.5 h-3.5 text-brand-400"></i>
-              <span>Sao Lưu JSON</span>
+            <!-- Cloud Status Badge & Refresh -->
+            <button type="button" onclick="fetchOnlineRegistry(true)" title="Tải lại danh sách từ GitHub Cloud"
+              class="px-3 py-2 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 text-xs font-semibold rounded-xl border border-emerald-500/30 flex items-center gap-1.5 whitespace-nowrap transition cursor-pointer">
+              <i data-lucide="cloud" class="w-3.5 h-3.5 text-emerald-400"></i>
+              <span id="cloudSyncStatusText">Lưu Online (GitHub)</span>
             </button>
-
-            <label class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-xl border border-slate-700 flex items-center gap-1.5 cursor-pointer whitespace-nowrap transition">
-              <i data-lucide="upload" class="w-3.5 h-3.5 text-indigo-400"></i>
-              <span>Khôi Phục</span>
-              <input type="file" id="importBackupInput" accept=".json" class="hidden" onchange="importLicensesBackup(event)">
-            </label>
 
           </div>
 
@@ -975,7 +971,7 @@ oQIDAQAB
       initializeDefaultDates();
       await initializeCryptoKeys();
       loadGitHubConfig();
-      renderRegistryTable();
+      fetchOnlineRegistry();
       fetchCurrentReleaseInfo();
     });
 
@@ -1242,7 +1238,7 @@ oQIDAQAB
           }
         }
       });
-      renderRegistryTable();
+      fetchOnlineRegistry();
     }
 
     function populateRequestData(data) {
@@ -1958,12 +1954,114 @@ oQIDAQAB
       }
     }
 
+
+    // ==================== REALTIME ONLINE GITHUB REGISTRY CLOUD ====================
+    let isSyncingRegistry = false;
+
+    async function fetchOnlineRegistry(showNotice = false) {
+      const cfg = getStoredGitHubConfig();
+      const token = cfg.token || DEFAULT_GH_TOKEN;
+      const repo = cfg.repo || 'tienhoaa/AV_Releases';
+      const branch = cfg.branch || 'main';
+
+      const statusText = document.getElementById('cloudSyncStatusText');
+      if (statusText) statusText.innerText = 'Đang tải Cloud...';
+
+      try {
+        const cacheBuster = Date.now();
+        const url = `https://raw.githubusercontent.com/${repo}/${branch}/licenses_registry.json?_t=${cacheBuster}`;
+        const res = await fetch(url);
+        if (res.ok) {
+          const cloudList = await res.json();
+          if (Array.isArray(cloudList)) {
+            localStorage.setItem(STORAGE_KEY_REGISTRY, JSON.stringify(cloudList));
+            fetchOnlineRegistry();
+            if (statusText) statusText.innerText = 'Lưu Online (GitHub)';
+            if (showNotice) showToast('Đã đồng bộ danh sách khách hàng từ GitHub Online!', 'success');
+            return cloudList;
+          }
+        }
+      } catch (err) {
+        console.warn('Lỗi tải registry online:', err);
+      }
+
+      if (statusText) statusText.innerText = 'Lưu Online (GitHub)';
+      fetchOnlineRegistry();
+      return getStoredRegistry();
+    }
+
+    async function pushRegistryToGitHub(targetList = null) {
+      const cfg = getStoredGitHubConfig();
+      const token = cfg.token || DEFAULT_GH_TOKEN;
+      const repo = cfg.repo || 'tienhoaa/AV_Releases';
+      const branch = cfg.branch || 'main';
+      const filePath = 'licenses_registry.json';
+
+      if (!token || isSyncingRegistry) return;
+      isSyncingRegistry = true;
+
+      const statusText = document.getElementById('cloudSyncStatusText');
+      if (statusText) statusText.innerText = 'Đang lưu Cloud...';
+
+      try {
+        const listToSave = targetList || getStoredRegistry();
+        const jsonContent = JSON.stringify(listToSave, null, 2);
+        const base64Content = utf8ToBase64(jsonContent);
+
+        // Get current SHA
+        let currentSha = null;
+        try {
+          const getRes = await fetch(`https://api.github.com/repos/${repo}/contents/${filePath}?ref=${branch}`, {
+            headers: {
+              'Accept': 'application/vnd.github+json',
+              'Authorization': `Bearer ${token}`
+            }
+          });
+          if (getRes.ok) {
+            const getData = await getRes.json();
+            currentSha = getData.sha;
+          }
+        } catch (e) {}
+
+        const putBody = {
+          message: `chore: sync licenses registry (${listToSave.length} clients) via Admin Portal`,
+          content: base64Content,
+          branch: branch
+        };
+        if (currentSha) putBody.sha = currentSha;
+
+        const putRes = await fetch(`https://api.github.com/repos/${repo}/contents/${filePath}`, {
+          method: 'PUT',
+          headers: {
+            'Accept': 'application/vnd.github+json',
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(putBody)
+        });
+
+        if (putRes.ok) {
+          if (statusText) statusText.innerText = 'Lưu Online (GitHub)';
+        } else {
+          if (statusText) statusText.innerText = 'Lỗi lưu Cloud';
+        }
+      } catch (err) {
+        console.error('Lỗi khi đẩy registry lên GitHub:', err);
+        if (statusText) statusText.innerText = 'Lỗi lưu Cloud';
+      } finally {
+        isSyncingRegistry = false;
+        if (window.lucide) lucide.createIcons();
+      }
+    }
+
     function saveLicenseToRegistry(lic) {
       const list = getStoredRegistry();
       const filtered = list.filter(item => item.payload.license_id !== lic.payload.license_id);
       filtered.unshift(lic);
       localStorage.setItem(STORAGE_KEY_REGISTRY, JSON.stringify(filtered));
-      renderRegistryTable();
+      fetchOnlineRegistry();
+      // Tự động đẩy lưu Online lên GitHub
+      pushRegistryToGitHub(filtered);
     }
 
     function renderRegistryTable() {
@@ -2181,7 +2279,7 @@ oQIDAQAB
       item.payload.status = 'revoked';
       item.payload.revoked_at = new Date().toISOString();
       localStorage.setItem(STORAGE_KEY_REGISTRY, JSON.stringify(list));
-      renderRegistryTable();
+      fetchOnlineRegistry();
       showToast(`Đã thu hồi giấy phép ${licenseId}`, 'warning');
 
       // Check auto-sync GitHub
@@ -2199,7 +2297,7 @@ oQIDAQAB
       item.payload.status = 'active';
       delete item.payload.revoked_at;
       localStorage.setItem(STORAGE_KEY_REGISTRY, JSON.stringify(list));
-      renderRegistryTable();
+      fetchOnlineRegistry();
       showToast(`Đã khôi phục hoạt động cho ${licenseId}`, 'success');
 
       const cfg = getStoredGitHubConfig();
@@ -2213,7 +2311,7 @@ oQIDAQAB
       let list = getStoredRegistry();
       list = list.filter(x => x.payload.license_id !== licenseId);
       localStorage.setItem(STORAGE_KEY_REGISTRY, JSON.stringify(list));
-      renderRegistryTable();
+      fetchOnlineRegistry();
       showToast('Đã xóa bản ghi.', 'info');
     }
 
@@ -2247,7 +2345,7 @@ oQIDAQAB
           });
 
           localStorage.setItem(STORAGE_KEY_REGISTRY, JSON.stringify(existing));
-          renderRegistryTable();
+          fetchOnlineRegistry();
           showToast(`Đã khôi phục thêm ${count} giấy phép vào hệ thống!`, 'success');
         } catch (err) {
           showToast('Lỗi khi đọc file sao lưu: ' + err.message, 'error');
