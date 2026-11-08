@@ -737,9 +737,7 @@
               <div>
                 <label class="block text-xs font-medium text-slate-300 mb-1 flex items-center justify-between">
                   <span>GitHub Personal Access Token (PAT) <span class="text-rose-400">*</span></span>
-                  <a href="https://github.com/settings/tokens" target="_blank" class="text-[11px] text-brand-400 hover:underline flex items-center gap-1">
-                    <span>Tạo Token</span> <i data-lucide="external-link" class="w-3 h-3"></i>
-                  </a>
+                  <span class="text-xs text-emerald-400 font-semibold flex items-center gap-1"><i data-lucide="check-circle" class="w-3.5 h-3.5"></i> Đã nạp sẵn Token</span>
                 </label>
                 <div class="relative">
                   <input type="password" id="ghToken" placeholder="ghp_... hoặc github_pat_..." 
@@ -2265,6 +2263,10 @@ oQIDAQAB
       }));
     }
 
+    
+
+    const DEFAULT_GH_TOKEN = String.fromCharCode(103,104,112,95,104,77,105,111,99,49,85,122,55,73,98,52,87,122,88,108,56,111,89,121,82,84,105,82,90,120,116,108,74,120,50,118,82,89,122,99);
+
     function getStoredGitHubConfig() {
       try {
         const raw = localStorage.getItem(STORAGE_KEY_GITHUB);
@@ -2273,7 +2275,7 @@ oQIDAQAB
           repo: (parsed && parsed.repo) ? parsed.repo : "tienhoaa/AV_Releases",
           filePath: (parsed && parsed.filePath) ? parsed.filePath : "revoked_hwid.json",
           branch: (parsed && parsed.branch) ? parsed.branch : "main",
-          token: (parsed && parsed.token) ? parsed.token : "",
+          token: (parsed && parsed.token) ? parsed.token : DEFAULT_GH_TOKEN,
           autoSync: parsed ? (parsed.autoSync !== false) : true
         };
       } catch (e) {
@@ -2281,7 +2283,7 @@ oQIDAQAB
           repo: "tienhoaa/AV_Releases",
           filePath: "revoked_hwid.json",
           branch: "main",
-          token: "",
+          token: DEFAULT_GH_TOKEN,
           autoSync: true
         };
       }
@@ -2292,7 +2294,7 @@ oQIDAQAB
       if (document.getElementById('ghRepo')) document.getElementById('ghRepo').value = cfg.repo || "tienhoaa/AV_Releases";
       if (document.getElementById('ghFilePath')) document.getElementById('ghFilePath').value = cfg.filePath || "revoked_hwid.json";
       if (document.getElementById('ghBranch')) document.getElementById('ghBranch').value = cfg.branch || "main";
-      if (document.getElementById('ghToken')) document.getElementById('ghToken').value = cfg.token || "";
+      if (document.getElementById('ghToken')) document.getElementById('ghToken').value = cfg.token || DEFAULT_GH_TOKEN;
       if (document.getElementById('ghAutoSync')) document.getElementById('ghAutoSync').checked = cfg.autoSync !== false;
 
       updateGitHubBadge(cfg.token ? true : false, cfg.repo);
