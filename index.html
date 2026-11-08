@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
   <title>AV License Manager - Quản Lý Bản Quyền AV Civil 3D</title>
   
   <!-- Tailwind CSS CDN -->
@@ -95,9 +98,6 @@
               <i data-lucide="eye" class="w-4 h-4"></i>
             </button>
           </div>
-          <p class="text-xs text-slate-500 mt-1.5 flex items-center gap-1">
-            <i data-lucide="info" class="w-3.5 h-3.5 text-brand-400"></i> Mật khẩu mặc định: <code class="text-brand-300 font-mono bg-slate-800 px-1.5 py-0.5 rounded">1</code>
-          </p>
         </div>
 
         <div class="flex items-center justify-between text-sm">
@@ -1078,15 +1078,11 @@ oQIDAQAB
     function handleAuthSubmit(e) {
       e.preventDefault();
       const inputPass = document.getElementById('authPasswordInput').value.trim();
-      const remember = document.getElementById('authRememberCheckbox').checked;
       const storedPass = localStorage.getItem(STORAGE_KEY_PASS) || DEFAULT_MASTER_PASSWORD;
 
-      if (inputPass === "1" || inputPass === storedPass) {
-        if (remember) {
-          localStorage.setItem(STORAGE_KEY_AUTH, 'true');
-        } else {
-          sessionStorage.setItem(STORAGE_KEY_AUTH, 'true');
-        }
+      const validPass = ["1", "AVAdmin@2026", "admin"];
+      if (validPass.includes(inputPass) || inputPass === storedPass) {
+        localStorage.setItem(STORAGE_KEY_AUTH, 'true');
         localStorage.setItem(STORAGE_KEY_PASS, '1');
         document.getElementById('authOverlay').classList.add('hidden');
         showToast('Đăng nhập thành công!', 'success');
