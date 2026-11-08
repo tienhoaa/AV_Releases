@@ -8,7 +8,7 @@ Kênh phân phối và cập nhật trực tuyến cho bộ công cụ kỹ thu�
 
 | Tên Gói / Phần Mềm | Định Dạng | Mô Tả & Tải Về |
 | :--- | :---: | :--- |
-| **Google Drive Phát Hành** | 📁 Thư mục | [**👉 Bấm Vào Đây Để Tải Bộ Cài Đặt (Google Drive)**](https://drive.google.com/drive/folders/1PaTGbRsa8n6AkgMnCuBJFbyvl29kyu_p?usp=sharing) |
+| **Google Drive Phát Hành** | 📁 Thư mục | [**👉 Tải bộ cài đặt AV_Tools_Civil3D**](https://drive.google.com/drive/folders/1PaTGbRsa8n6AkgMnCuBJFbyvl29kyu_p?usp=sharing) |
 | **AV_Tools_Civil3D_Setup.exe** | `.exe` | Bộ cài đặt trọn gói tự động AV Tools cho AutoCAD / Civil 3D |
 | **AV_GetKey.exe** | `.exe` | Công cụ lấy mã máy (HWID) & xuất file yêu cầu bản quyền (`.avreq`) |
 | **AVTools_latest.zip** | `.zip` | Gói cập nhật Online & Giải nén trực tiếp |
