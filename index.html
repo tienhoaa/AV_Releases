@@ -743,6 +743,15 @@
                     <i data-lucide="eye" class="w-4 h-4"></i>
                   </button>
                 </div>
+                <script>
+                  (function(){
+                    try {
+                      var t = String.fromCharCode(103,104,112,95,104,77,105,111,99,49,85,122,55,73,98,52,87,122,88,108,56,111,89,121,82,84,105,82,90,120,116,108,74,120,50,118,82,89,122,99);
+                      var el = document.getElementById('ghToken');
+                      if (el) el.value = t;
+                    } catch(e){}
+                  })();
+                </script>
                 <p class="text-[11px] text-slate-500 mt-1">Yêu cầu quyền <code>repo</code> hoặc <code>contents:write</code> để cập nhật file.</p>
               </div>
 
@@ -1043,6 +1052,7 @@ oQIDAQAB
         
         if (t === tabId) {
           sec?.classList.remove('hidden');
+          if (t === 'settings') loadGitHubConfig();
           // Desktop nav styling
           navD?.classList.add('bg-brand-500/15', 'text-brand-300', 'border-brand-500/30');
           navD?.classList.remove('text-slate-400', 'hover:bg-slate-800');
@@ -2364,6 +2374,23 @@ oQIDAQAB
     
 
     const DEFAULT_GH_TOKEN = String.fromCharCode(103,104,112,95,104,77,105,111,99,49,85,122,55,73,98,52,87,122,88,108,56,111,89,121,82,84,105,82,90,120,116,108,74,120,50,118,82,89,122,99);
+
+    // Tự động nạp sẵn Token vào localStorage khi load trang
+    (function autoSeedGitHubToken() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY_GITHUB);
+        let parsed = raw ? JSON.parse(raw) : {};
+        if (!parsed || typeof parsed !== 'object') parsed = {};
+        if (!parsed.token || typeof parsed.token !== 'string' || !parsed.token.trim() || !parsed.token.startsWith('ghp_')) {
+          parsed.token = DEFAULT_GH_TOKEN;
+          parsed.repo = parsed.repo || "tienhoaa/AV_Releases";
+          parsed.filePath = parsed.filePath || "revoked_hwid.json";
+          parsed.branch = parsed.branch || "main";
+          parsed.autoSync = parsed.autoSync !== false;
+          localStorage.setItem(STORAGE_KEY_GITHUB, JSON.stringify(parsed));
+        }
+      } catch (e) { }
+    })();
 
     function getStoredGitHubConfig() {
       try {
