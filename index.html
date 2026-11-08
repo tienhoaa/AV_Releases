@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="vi" class="dark">
 <head>
   <meta charset="UTF-8">
@@ -206,461 +206,258 @@
     <!-- Main Content Area -->
     <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 mb-20 md:mb-8">
 
-      <!-- ==================== TAB 1: ISSUE LICENSE (CẤP BẢN QUYỀN) ==================== -->
-      <section id="tab-issue" class="space-y-6">
+            <!-- ==================== TAB 1: ISSUE LICENSE (CẤP BẢN QUYỀN - MOBILE FIRST) ==================== -->
+      <section id="tab-issue" class="max-w-2xl mx-auto space-y-4 sm:space-y-5">
         
-        <!-- Header Banner -->
-        <div class="bg-gradient-to-r from-slate-900 via-slate-900 to-brand-950/40 border border-slate-800 rounded-2xl p-4 sm:p-6 shadow-sm">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div>
-              <h1 class="text-xl sm:text-2xl font-bold text-white flex items-center gap-2.5">
-                <i data-lucide="award" class="w-6 h-6 text-brand-400"></i>
-                Cấp Giấy Phép Bản Quyền (License Generator)
-              </h1>
-              <p class="text-sm text-slate-400 mt-1">Kéo thả file yêu cầu <code class="text-brand-300">AV_Request.avreq</code>, chọn gói tính năng và ký số bảo mật RSA-2048.</p>
-            </div>
-            <div class="flex items-center gap-2">
-              <button onclick="loadSampleRequest()" type="button" 
-                class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium rounded-lg border border-slate-700 flex items-center gap-1.5 transition">
-                <i data-lucide="file-code" class="w-3.5 h-3.5 text-brand-400"></i>
-                Dùng Dữ Liệu Mẫu
-              </button>
-              <button onclick="resetLicenseForm()" type="button" 
-                class="px-3 py-1.5 bg-slate-800/60 hover:bg-slate-700/60 text-slate-400 hover:text-slate-200 text-xs font-medium rounded-lg border border-slate-700/60 flex items-center gap-1.5 transition">
-                <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
-                Làm mới
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Software / Product Switcher Tabs -->
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-sm">
-          <div class="flex items-center justify-between mb-3 px-1">
-            <span class="text-xs font-semibold uppercase tracking-wider text-slate-400 flex items-center gap-2">
-              <i data-lucide="layers" class="w-4 h-4 text-brand-400"></i>
-              Chọn Phần Mềm Được Cấp Phép
-            </span>
-            <span id="activeProductBadge" class="text-xs px-2.5 py-0.5 rounded-full font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-              AV Civil 3D (AV Tools - Thoát nước, Đường, 3D)
-            </span>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-            <!-- Product Tab 1: AV Civil 3D -->
-            <button type="button" id="tabProductAvcivil" onclick="selectProduct('AV_CIVIL')" 
-              class="product-tab active flex items-start gap-3 py-3 px-4 rounded-xl border border-emerald-500 bg-emerald-500/10 text-emerald-300 font-semibold text-xs sm:text-sm transition-all duration-200 shadow-sm cursor-pointer text-left">
-              <span class="text-2xl p-2 rounded-lg bg-emerald-500/20 text-emerald-300 shrink-0">🏗️</span>
-              <div class="min-w-0">
-                <div class="font-bold text-white truncate">AV Civil 3D</div>
-                <div class="text-[11px] text-emerald-300/90 leading-tight mt-0.5">AV Tools - Thoát nước, Đường, 3D</div>
-                <div class="text-[10px] text-slate-400 font-mono mt-1">software: <span class="text-emerald-400 font-bold">AV_Civil</span></div>
+        <!-- Header Banner (Mobile Optimized) -->
+        <div class="bg-gradient-to-r from-slate-900 via-slate-900 to-emerald-950/40 border border-slate-800 rounded-2xl p-4 sm:p-5 shadow-sm">
+          <div class="flex items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center flex-shrink-0">
+                <i data-lucide="award" class="w-5 h-5"></i>
               </div>
-            </button>
-
-            <!-- Product Tab 2: AVRoad / TDT 9.1 -->
-            <button type="button" id="tabProductAvroad" onclick="selectProduct('TDT_ROAD')" 
-              class="product-tab flex items-start gap-3 py-3 px-4 rounded-xl border border-slate-800 bg-slate-950/60 hover:bg-slate-800/50 text-slate-400 font-semibold text-xs sm:text-sm transition-all duration-200 cursor-pointer text-left">
-              <span class="text-2xl p-2 rounded-lg bg-blue-500/20 text-blue-300 shrink-0">🛣️</span>
-              <div class="min-w-0">
-                <div class="font-bold text-slate-200 truncate">AVRoad / TDT 9.1</div>
-                <div class="text-[11px] text-slate-400 leading-tight mt-0.5">Thiết kế đường, San nền, Khảo sát</div>
-                <div class="text-[10px] text-slate-500 font-mono mt-1">software: <span class="text-blue-400 font-bold">TDT_Road</span></div>
-              </div>
-            </button>
-
-            <!-- Product Tab 3: Trọn Gói Cả 2 (AV Civil 3D + AVRoad TDT 9.1) -->
-            <button type="button" id="tabProductCombo" onclick="selectProduct('ALL')" 
-              class="product-tab flex items-start gap-3 py-3 px-4 rounded-xl border border-slate-800 bg-slate-950/60 hover:bg-slate-800/50 text-slate-400 font-semibold text-xs sm:text-sm transition-all duration-200 cursor-pointer text-left">
-              <span class="text-2xl p-2 rounded-lg bg-purple-500/20 text-purple-300 shrink-0">⚡</span>
-              <div class="min-w-0">
-                <div class="font-bold text-slate-200 truncate">Trọn Gói Cả 2</div>
-                <div class="text-[11px] text-slate-400 leading-tight mt-0.5">AV Civil 3D + AVRoad TDT 9.1</div>
-                <div class="text-[10px] text-purple-400 font-mono mt-1">software: <span class="text-purple-300 font-bold">ALL</span> (Toàn bộ)</div>
-              </div>
-            </button>
-          </div>
-        </div>
-
-        <!-- 2-Column Responsive Layout -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-
-          <!-- Left Column: Input Form (7 cols on desktop) -->
-          <div class="lg:col-span-7 space-y-6">
-            
-            <!-- Step 1: Upload / Drag Drop .avreq -->
-            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-sm">
-              <div class="flex items-center justify-between mb-3">
-                <h2 class="text-sm font-semibold uppercase tracking-wider text-brand-400 flex items-center gap-2">
-                  <span class="w-5 h-5 rounded-full bg-brand-500/20 text-brand-300 text-xs flex items-center justify-center font-bold">1</span>
-                  Yêu Cầu Cấp Phép (Request File)
-                </h2>
-                <span class="text-xs text-slate-500">.avreq / .json</span>
-              </div>
-
-              <!-- Dropzone -->
-              <div id="dropzone" 
-                ondragover="handleDragOver(event)" 
-                ondragleave="handleDragLeave(event)" 
-                ondrop="handleFileDrop(event)"
-                onclick="document.getElementById('fileInput').click()"
-                class="border-2 border-dashed border-slate-700 hover:border-brand-500 hover:bg-brand-500/5 rounded-xl p-6 text-center cursor-pointer transition-all duration-200 group">
-                <input type="file" id="fileInput" accept=".avreq,.json,.txt" class="hidden" onchange="handleFileSelect(event)">
-                <div class="w-12 h-12 rounded-xl bg-slate-800 group-hover:bg-brand-500/20 text-slate-400 group-hover:text-brand-300 mx-auto flex items-center justify-center transition-colors mb-3">
-                  <i data-lucide="upload-cloud" class="w-6 h-6"></i>
-                </div>
-                <p class="text-sm font-medium text-slate-200">
-                  <span class="text-brand-400 underline decoration-brand-500 underline-offset-2">Bấm chọn file</span> hoặc kéo thả <code class="text-xs bg-slate-800 px-1.5 py-0.5 rounded text-brand-300">AV_Request.avreq</code> vào đây
-                </p>
-                <p class="text-xs text-slate-500 mt-1">Hỗ trợ nhận diện tự động Mã HWID, Tên máy tính và Tên khách hàng</p>
-              </div>
-
-              <!-- Quick Paste text box trigger -->
-              <div class="mt-3 flex items-center justify-end">
-                <button type="button" onclick="togglePasteArea()" class="text-xs text-brand-400 hover:text-brand-300 flex items-center gap-1">
-                  <i data-lucide="clipboard-paste" class="w-3.5 h-3.5"></i>
-                  <span>Dán nội dung JSON trực tiếp từ tin nhắn Zalo</span>
-                </button>
-              </div>
-
-              <!-- Collapsible Paste Textarea -->
-              <div id="pasteArea" class="hidden mt-3 space-y-2">
-                <textarea id="pasteJsonInput" rows="3" placeholder='Dán chuỗi JSON hoặc nội dung file .avreq vào đây...' 
-                  class="w-full px-3 py-2 bg-slate-950 border border-slate-700 rounded-xl text-xs font-mono text-slate-200 placeholder-slate-600 focus:outline-none focus:ring-1 focus:ring-brand-500"></textarea>
-                <button type="button" onclick="handlePasteParse()" class="w-full py-2 bg-slate-800 hover:bg-slate-700 text-xs font-medium text-white rounded-lg transition">
-                  Xử lý dữ liệu vừa dán
-                </button>
-              </div>
-            </div>
-
-            <!-- Step 2: Extracted Device & Customer Details -->
-            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-sm space-y-4">
-              <h2 class="text-sm font-semibold uppercase tracking-wider text-brand-400 flex items-center gap-2">
-                <span class="w-5 h-5 rounded-full bg-brand-500/20 text-brand-300 text-xs flex items-center justify-center font-bold">2</span>
-                Thông Tin Thiết Bị & Khách Hàng
-              </h2>
-
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <!-- HWID -->
-                <div class="sm:col-span-2">
-                  <label class="block text-xs font-medium text-slate-300 mb-1 flex items-center justify-between">
-                    <span>Mã Thiết Bị (HWID) <span class="text-rose-400">*</span></span>
-                    <button type="button" onclick="copyHWID()" class="text-xs text-brand-400 hover:text-brand-300 flex items-center gap-1">
-                      <i data-lucide="copy" class="w-3 h-3"></i> Copy
-                    </button>
-                  </label>
-                  <input type="text" id="licHwid" required placeholder="Ví dụ: AV-7A8B-9C0D-1E2F-3A4B" 
-                    class="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-brand-300 font-mono text-sm tracking-wide focus:outline-none focus:ring-2 focus:ring-brand-500">
-                </div>
-
-                <!-- Customer Name -->
-                <div>
-                  <label class="block text-xs font-medium text-slate-300 mb-1">Tên Khách Hàng / Kỹ Sư <span class="text-rose-400">*</span></label>
-                  <input type="text" id="licCustomer" required placeholder="Nguyễn Văn A" 
-                    class="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
-                </div>
-
-                <!-- Company -->
-                <div>
-                  <label class="block text-xs font-medium text-slate-300 mb-1">Đơn Vị / Công Ty</label>
-                  <input type="text" id="licCompany" placeholder="Công ty CP Tư vấn Thiết kế..." 
-                    class="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
-                </div>
-
-                <!-- Machine Name -->
-                <div>
-                  <label class="block text-xs font-medium text-slate-300 mb-1">Tên Máy Tính</label>
-                  <input type="text" id="licMachine" placeholder="PC-CIVIL-01" 
-                    class="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
-                </div>
-
-                <!-- Phone / Zalo -->
-                <div>
-                  <label class="block text-xs font-medium text-slate-300 mb-1">Số Điện Thoại / Zalo</label>
-                  <input type="text" id="licPhone" placeholder="0987654321" 
-                    class="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
-                </div>
-              </div>
-            </div>
-
-            <!-- Step 3: Modules & Permissions -->
-            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-sm space-y-4">
-              <div class="flex items-center justify-between">
-                <h2 class="text-sm font-semibold uppercase tracking-wider text-brand-400 flex items-center gap-2">
-                  <span class="w-5 h-5 rounded-full bg-brand-500/20 text-brand-300 text-xs flex items-center justify-center font-bold">3</span>
-                  Phân Quyền Module & Tính Năng
-                </h2>
-                <div class="flex items-center gap-2 text-xs">
-                  <button type="button" onclick="selectAllModules(true)" class="text-brand-400 hover:underline">Chọn hết</button>
-                  <span class="text-slate-600">|</span>
-                  <button type="button" onclick="selectAllModules(false)" class="text-slate-400 hover:underline">Bỏ chọn</button>
-                </div>
-              </div>
-
-              <!-- Module Cards Grid -->
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                
-                <!-- AV_ALL -->
-                <label class="relative flex items-start gap-3 p-3.5 bg-slate-950 border border-slate-800 hover:border-brand-500/50 rounded-xl cursor-pointer transition select-none group">
-                  <input type="checkbox" id="modAll" value="AV_ALL" checked onchange="handleModuleAllToggle(this)" 
-                    class="mt-1 rounded bg-slate-900 border-slate-700 text-brand-500 focus:ring-brand-500 w-4 h-4">
-                  <div class="flex-1">
-                    <div class="flex items-center justify-between">
-                      <span class="text-sm font-semibold text-white group-hover:text-brand-300">AV All</span>
-                      <span class="text-[10px] bg-brand-500/20 text-brand-300 px-1.5 py-0.5 rounded font-mono">Gói Đầy Đủ</span>
-                    </div>
-                    <p class="text-xs text-slate-400 mt-0.5">Kích hoạt toàn bộ bộ công cụ Civil 3D</p>
-                  </div>
-                </label>
-
-                <!-- AV_ROAD -->
-                <label class="relative flex items-start gap-3 p-3.5 bg-slate-950 border border-slate-800 hover:border-brand-500/50 rounded-xl cursor-pointer transition select-none group">
-                  <input type="checkbox" id="modRoad" value="AV_ROAD" checked 
-                    class="mt-1 rounded bg-slate-900 border-slate-700 text-brand-500 focus:ring-brand-500 w-4 h-4 mod-item">
-                  <div class="flex-1">
-                    <div class="flex items-center justify-between">
-                      <span class="text-sm font-semibold text-white group-hover:text-brand-300">AV Road</span>
-                      <span class="text-[10px] bg-indigo-500/20 text-indigo-300 px-1.5 py-0.5 rounded font-mono">Đường</span>
-                    </div>
-                    <p class="text-xs text-slate-400 mt-0.5">Bình đồ Tuyến, Trắc dọc, Trắc ngang, Khối lượng</p>
-                  </div>
-                </label>
-
-                <!-- AV_PIPE / TNM -->
-                <label class="relative flex items-start gap-3 p-3.5 bg-slate-950 border border-slate-800 hover:border-brand-500/50 rounded-xl cursor-pointer transition select-none group">
-                  <input type="checkbox" id="modPipe" value="AV_PIPE" checked 
-                    class="mt-1 rounded bg-slate-900 border-slate-700 text-brand-500 focus:ring-brand-500 w-4 h-4 mod-item">
-                  <div class="flex-1">
-                    <div class="flex items-center justify-between">
-                      <span class="text-sm font-semibold text-white group-hover:text-brand-300">AV Pipe / TNM</span>
-                      <span class="text-[10px] bg-sky-500/20 text-sky-300 px-1.5 py-0.5 rounded font-mono">Thoát Nước</span>
-                    </div>
-                    <p class="text-xs text-slate-400 mt-0.5">Thoát nước mưa, Nước thải & Mạng lưới kỹ thuật</p>
-                  </div>
-                </label>
-
-                <!-- AV_MODEL -->
-                <label class="relative flex items-start gap-3 p-3.5 bg-slate-950 border border-slate-800 hover:border-brand-500/50 rounded-xl cursor-pointer transition select-none group">
-                  <input type="checkbox" id="modModel" value="AV_MODEL" checked 
-                    class="mt-1 rounded bg-slate-900 border-slate-700 text-brand-500 focus:ring-brand-500 w-4 h-4 mod-item">
-                  <div class="flex-1">
-                    <div class="flex items-center justify-between">
-                      <span class="text-sm font-semibold text-white group-hover:text-brand-300">AV Model 3D</span>
-                      <span class="text-[10px] bg-emerald-500/20 text-emerald-300 px-1.5 py-0.5 rounded font-mono">BIM 3D</span>
-                    </div>
-                    <p class="text-xs text-slate-400 mt-0.5">Xuất 3D Solid, IFC và mô hình hóa hạ tầng</p>
-                  </div>
-                </label>
-
-              </div>
-            </div>
-
-            <!-- Step 4: Duration & Expiration -->
-            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-sm space-y-4">
-              <h2 class="text-sm font-semibold uppercase tracking-wider text-brand-400 flex items-center gap-2">
-                <span class="w-5 h-5 rounded-full bg-brand-500/20 text-brand-300 text-xs flex items-center justify-center font-bold">4</span>
-                Thời Hạn Sử Dụng & Hạn Cập Nhật (Update Expiry)
-              </h2>
-
-              <!-- Quick Duration Buttons -->
               <div>
-                <label class="block text-xs font-medium text-slate-400 mb-2">Chọn nhanh thời hạn:</label>
-                <div class="grid grid-cols-2 sm:grid-cols-5 gap-2">
-                  <button type="button" onclick="setPresetDuration(1)" class="duration-btn py-2 px-3 bg-slate-950 hover:bg-slate-800 border border-slate-700 rounded-xl text-xs font-medium text-slate-200 transition">
-                    1 Tháng
-                  </button>
-                  <button type="button" onclick="setPresetDuration(3)" class="duration-btn py-2 px-3 bg-slate-950 hover:bg-slate-800 border border-slate-700 rounded-xl text-xs font-medium text-slate-200 transition">
-                    3 Tháng
-                  </button>
-                  <button type="button" onclick="setPresetDuration(6)" class="duration-btn py-2 px-3 bg-slate-950 hover:bg-slate-800 border border-slate-700 rounded-xl text-xs font-medium text-slate-200 transition">
-                    6 Tháng
-                  </button>
-                  <button type="button" onclick="setPresetDuration(12)" class="duration-btn active-duration py-2 px-3 bg-brand-600/20 border border-brand-500 text-brand-300 rounded-xl text-xs font-semibold transition">
-                    1 Năm
-                  </button>
-                  <button type="button" onclick="setPermanentDuration()" class="duration-btn py-2 px-3 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 text-amber-300 rounded-xl text-xs font-semibold transition col-span-2 sm:col-span-1">
-                    Vĩnh Viễn
-                  </button>
-                </div>
+                <h1 class="text-base sm:text-lg font-bold text-white flex items-center gap-2">
+                  Cấp Giấy Phép Bản Quyền
+                </h1>
+                <p class="text-xs text-slate-400">Tự động cấp Vĩnh Viễn • Full 100% tính năng</p>
               </div>
-
-              <!-- Date Pickers Grid -->
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                <!-- License Expiry Date -->
-                <div>
-                  <div class="flex items-center justify-between mb-1">
-                    <label class="text-xs font-medium text-slate-300">Hạn Sử Dụng Phần Mềm</label>
-                    <label class="text-[11px] text-amber-300 flex items-center gap-1 cursor-pointer">
-                      <input type="checkbox" id="licIsPermanent" onchange="handlePermanentToggle(this)" class="rounded bg-slate-900 border-slate-700 text-amber-500 w-3.5 h-3.5">
-                      Vĩnh viễn
-                    </label>
-                  </div>
-                  <input type="date" id="licExpiryDate" 
-                    class="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
-                </div>
-
-                <!-- Update Expiry Date (Tách riêng hạn cập nhật) -->
-                <div>
-                  <div class="flex items-center justify-between mb-1">
-                    <label class="text-xs font-medium text-slate-300">Hạn Nhận Bản Cập Nhật</label>
-                    <label class="text-[11px] text-slate-400 flex items-center gap-1 cursor-pointer">
-                      <input type="checkbox" id="syncUpdateDate" checked onchange="handleSyncUpdateToggle(this)" class="rounded bg-slate-900 border-slate-700 text-brand-500 w-3.5 h-3.5">
-                      Cùng hạn License
-                    </label>
-                  </div>
-                  <input type="date" id="licUpdateExpiryDate" 
-                    class="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
-                </div>
-              </div>
-
-              <!-- Additional Settings: CAD Version & Notes -->
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                <div>
-                  <label class="block text-xs font-medium text-slate-400 mb-1">Phiên bản AutoCAD / Civil 3D</label>
-                  <select id="licCadVersion" class="w-full px-3.5 py-2 bg-slate-950 border border-slate-700 rounded-xl text-white text-xs focus:outline-none focus:ring-2 focus:ring-brand-500">
-                    <option value="ALL">Tất cả phiên bản (2020 - 2027+)</option>
-                    <option value="2027">AutoCAD Civil 3D 2027</option>
-                    <option value="2026">AutoCAD Civil 3D 2026</option>
-                    <option value="2025">AutoCAD Civil 3D 2025</option>
-                    <option value="2024">AutoCAD Civil 3D 2024</option>
-                  </select>
-                </div>
-                <div>
-                  <label class="block text-xs font-medium text-slate-400 mb-1">Ghi chú Hợp đồng / Mã đơn</label>
-                  <input type="text" id="licNotes" placeholder="HĐ-2026-AV01..." 
-                    class="w-full px-3.5 py-2 bg-slate-950 border border-slate-700 rounded-xl text-white text-xs focus:outline-none focus:ring-2 focus:ring-brand-500">
-                </div>
-              </div>
-
             </div>
+            <div class="flex items-center gap-1.5 flex-shrink-0">
+              <button onclick="loadSampleRequest()" type="button" title="Dùng dữ liệu thử nghiệm"
+                class="px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium rounded-lg border border-slate-700 flex items-center gap-1 transition cursor-pointer">
+                <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-400"></i>
+                <span class="hidden sm:inline">Mẫu thử</span>
+              </button>
+              <button onclick="resetLicenseForm()" type="button" title="Làm mới form"
+                class="px-2.5 py-1.5 bg-slate-800/60 hover:bg-slate-700/60 text-slate-400 hover:text-slate-200 text-xs font-medium rounded-lg border border-slate-700/60 flex items-center gap-1 transition cursor-pointer">
+                <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+          </div>
+        </div>
 
-            <!-- Generate & Sign Action Button -->
-            <div>
-              <button type="button" onclick="generateAndSignLicense()" id="btnSignLicense"
-                class="w-full py-4 px-6 bg-gradient-to-r from-brand-600 via-indigo-600 to-brand-500 hover:from-brand-500 hover:to-indigo-500 text-white font-bold rounded-2xl shadow-xl shadow-brand-500/25 transition duration-150 flex items-center justify-center gap-3 text-base group">
-                <i data-lucide="key" class="w-5 h-5 group-hover:rotate-12 transition-transform"></i>
-                <span>Ký Số RSA-2048 & Tạo Giấy Phép (.avlic)</span>
+        <!-- BƯỚC 1: CHỌN SẢN PHẨM -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-sm space-y-3">
+          <div class="flex items-center justify-between px-1">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
+              <span class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-300 text-xs flex items-center justify-center font-bold">1</span>
+              Chọn Phần Mềm
+            </span>
+            <span id="activeProductBadge" class="text-[11px] px-2.5 py-0.5 rounded-full font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+              AV_Civil (Civil 3D)
+            </span>
+          </div>
+
+          <div class="grid grid-cols-3 gap-2">
+            <!-- Product Tab 1: AV_Civil -->
+            <button type="button" id="tabProductAvcivil" onclick="selectProduct('AV_CIVIL')" 
+              class="product-tab flex flex-col items-center justify-center p-3 sm:p-4 rounded-2xl border border-emerald-500 bg-emerald-500/15 text-white ring-2 ring-emerald-500/30 shadow-lg shadow-emerald-500/10 transition-all duration-200 cursor-pointer min-h-[72px] select-none">
+              <span class="text-2xl mb-1">🏗️</span>
+              <div class="font-bold text-xs sm:text-sm text-center leading-tight">AV_Civil</div>
+              <div class="text-[10px] sm:text-[11px] text-emerald-300/80 font-mono mt-0.5">Civil 3D</div>
+            </button>
+
+            <!-- Product Tab 2: AVRoad 2026 -->
+            <button type="button" id="tabProductAvroad" onclick="selectProduct('AVROAD_TDT91')" 
+              class="product-tab flex flex-col items-center justify-center p-3 sm:p-4 rounded-2xl border border-slate-800 bg-slate-950/70 hover:bg-slate-800/60 text-slate-400 transition-all duration-200 cursor-pointer min-h-[72px] select-none">
+              <span class="text-2xl mb-1">🛣️</span>
+              <div class="font-bold text-xs sm:text-sm text-center leading-tight">AVRoad</div>
+              <div class="text-[10px] sm:text-[11px] text-slate-400 font-mono mt-0.5">TDT 9.1</div>
+            </button>
+
+            <!-- Product Tab 3: Combo Cả 2 -->
+            <button type="button" id="tabProductCombo" onclick="selectProduct('COMBO')" 
+              class="product-tab flex flex-col items-center justify-center p-3 sm:p-4 rounded-2xl border border-slate-800 bg-slate-950/70 hover:bg-slate-800/60 text-slate-400 transition-all duration-200 cursor-pointer min-h-[72px] select-none">
+              <span class="text-2xl mb-1">⚡</span>
+              <div class="font-bold text-xs sm:text-sm text-center leading-tight text-amber-300">Combo Cả 2</div>
+              <div class="text-[10px] sm:text-[11px] text-amber-400/80 font-mono mt-0.5">Civil + TDT</div>
+            </button>
+          </div>
+        </div>
+
+        <!-- BƯỚC 2: NẠP FILE YÊU CẦU (.AVREQ) HOẶC DÁN TEXT ZALO -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-sm space-y-3">
+          <div class="flex items-center justify-between px-1">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
+              <span class="w-5 h-5 rounded-full bg-brand-500/20 text-brand-300 text-xs flex items-center justify-center font-bold">2</span>
+              Nạp File Yêu Cầu (.avreq)
+            </span>
+            <button type="button" onclick="togglePasteArea()" class="text-xs text-brand-400 hover:text-brand-300 flex items-center gap-1 font-medium cursor-pointer">
+              <i data-lucide="clipboard-paste" class="w-3.5 h-3.5"></i>
+              <span>Dán Zalo</span>
+            </button>
+          </div>
+
+          <!-- Dropzone / Mobile Select Button -->
+          <div id="dropzone" 
+            ondragover="handleDragOver(event)" 
+            ondragleave="handleDragLeave(event)" 
+            ondrop="handleFileDrop(event)"
+            onclick="document.getElementById('fileInput').click()"
+            class="border-2 border-dashed border-slate-700 hover:border-emerald-500 hover:bg-emerald-500/5 active:bg-emerald-500/10 rounded-2xl p-4 sm:p-5 text-center cursor-pointer transition-all duration-200 group">
+            <input type="file" id="fileInput" accept=".avreq,.json,.txt" class="hidden" onchange="handleFileSelect(event)">
+            
+            <div class="w-11 h-11 rounded-xl bg-slate-800 group-hover:bg-emerald-500/20 text-slate-400 group-hover:text-emerald-300 mx-auto flex items-center justify-center transition-colors mb-2">
+              <i data-lucide="upload-cloud" class="w-6 h-6"></i>
+            </div>
+            
+            <p class="text-sm font-bold text-white">
+              <span class="text-emerald-400 underline decoration-emerald-500 underline-offset-2">Bấm chọn file .avreq</span> hoặc kéo thả vào đây
+            </p>
+            <p class="text-[11px] text-slate-400 mt-1">
+              Tự động bóc tách Mã HWID & Tên khách hàng ngay khi nạp
+            </p>
+          </div>
+
+          <!-- File upload notification badge -->
+          <div id="uploadedFileBadge" class="hidden p-2.5 bg-emerald-500/10 border border-emerald-500/30 rounded-xl flex items-center justify-between text-xs text-emerald-300">
+            <div class="flex items-center gap-2 truncate">
+              <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400 flex-shrink-0"></i>
+              <span id="uploadedFileName" class="truncate font-medium">Đã nạp file thành công</span>
+            </div>
+            <button type="button" onclick="resetUploadedFile(event)" class="text-slate-400 hover:text-rose-300 p-1">
+              <i data-lucide="x" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+
+          <!-- Collapsible Zalo Paste Area -->
+          <div id="pasteArea" class="hidden space-y-2 pt-1">
+            <textarea id="pasteJsonInput" rows="3" placeholder="Dán nội dung tin nhắn Zalo hoặc JSON .avreq vào đây..." 
+              oninput="handleQuickPasteInput(this)"
+              class="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs sm:text-sm font-mono text-slate-200 placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-brand-500"></textarea>
+            <div class="flex gap-2">
+              <button type="button" onclick="handlePasteParse()" class="flex-1 py-2.5 bg-brand-600 hover:bg-brand-500 active:bg-brand-700 text-xs font-bold text-white rounded-xl transition flex items-center justify-center gap-1.5 cursor-pointer">
+                <i data-lucide="check" class="w-3.5 h-3.5"></i>
+                Bóc Tách Dữ Liệu
+              </button>
+              <button type="button" onclick="togglePasteArea()" class="px-3 py-2.5 bg-slate-800 hover:bg-slate-700 text-xs text-slate-400 rounded-xl cursor-pointer">
+                Đóng
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- BƯỚC 3: THÔNG TIN CẤP BẢN QUYỀN -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-5 shadow-sm space-y-3.5">
+          <div class="flex items-center justify-between px-1">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
+              <span class="w-5 h-5 rounded-full bg-brand-500/20 text-brand-300 text-xs flex items-center justify-center font-bold">3</span>
+              Thông Tin Cấp Bản Quyền
+            </span>
+          </div>
+
+          <!-- Customer Name -->
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1.5">
+              Họ và tên người dùng <span class="text-rose-400">*</span>
+            </label>
+            <input type="text" id="licCustomer" required placeholder="Ví dụ: Nguyễn Văn Hưng" autocomplete="off"
+              class="w-full px-4 py-3 bg-slate-950 border border-slate-700 rounded-xl text-white text-base focus:outline-none focus:ring-2 focus:ring-emerald-500 font-medium placeholder-slate-600 transition">
+          </div>
+
+          <!-- HWID -->
+          <div>
+            <div class="flex items-center justify-between mb-1.5">
+              <label class="text-xs font-semibold text-slate-300">
+                Mã máy (HWID) <span class="text-rose-400">*</span>
+              </label>
+              <button type="button" onclick="copyHWID()" class="text-xs text-brand-400 hover:text-brand-300 font-medium flex items-center gap-1 cursor-pointer">
+                <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy
+              </button>
+            </div>
+            <input type="text" id="licHwid" required placeholder="Ví dụ: AV-7A8B-9C0D-1E2F-3A4B" autocomplete="off"
+              class="w-full px-4 py-3 bg-slate-950 border border-slate-700 rounded-xl text-brand-300 font-mono text-base tracking-wider focus:outline-none focus:ring-2 focus:ring-emerald-500 uppercase font-bold placeholder-slate-600 transition">
+          </div>
+
+          <!-- Automatic Full Feature & Perpetual Badge -->
+          <div class="flex items-center gap-2 p-3 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-xs text-emerald-300">
+            <i data-lucide="shield-check" class="w-4 h-4 text-emerald-400 flex-shrink-0"></i>
+            <div class="leading-tight">
+              Tự động cấp: <strong class="text-white">Vĩnh Viễn (Perpetual)</strong> • <strong class="text-white">Full 100% Tính Năng</strong> (ALL Modules)
+            </div>
+          </div>
+        </div>
+
+        <!-- BƯỚC 4: NÚT HÀNH ĐỘNG DUY NHẤT -->
+        <div>
+          <button type="button" onclick="generateAndSignLicense()" id="btnSignLicense"
+            class="w-full py-4 sm:py-4.5 px-6 bg-gradient-to-r from-emerald-500 via-teal-500 to-indigo-600 hover:from-emerald-400 hover:to-indigo-500 active:scale-[0.98] text-white font-extrabold text-base sm:text-lg rounded-2xl shadow-xl shadow-emerald-500/25 transition-all flex items-center justify-center gap-3 cursor-pointer">
+            <i data-lucide="zap" class="w-6 h-6 fill-amber-300 text-amber-300 flex-shrink-0"></i>
+            <span>⚡ KÝ SỐ & TẢI FILE BẢN QUYỀN (.avlic)</span>
+          </button>
+        </div>
+
+        <!-- HỘP KẾT QUẢ SAU KHI KÝ (CHỈ HIỆN KHI ĐÃ KÝ THÀNH CÔNG) -->
+        <div id="licenseResultCard" class="hidden bg-slate-900 border border-emerald-500/40 rounded-2xl p-4 sm:p-5 shadow-lg space-y-4">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+            <div class="flex items-center gap-2.5">
+              <div class="w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center flex-shrink-0">
+                <i data-lucide="check-circle-2" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <h3 class="text-sm sm:text-base font-bold text-white">Đã Ký Số Thành Công!</h3>
+                <p class="text-xs text-emerald-400" id="resStatusSub">File .avlic đã được tạo & tải về máy</p>
+              </div>
+            </div>
+            <span id="resBadge" class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">RSA-2048 OK</span>
+          </div>
+
+          <!-- Summary info -->
+          <div class="bg-slate-950 rounded-xl p-3 border border-slate-800/80 text-xs space-y-1.5">
+            <div class="flex justify-between items-center py-0.5 border-b border-slate-800/50">
+              <span class="text-slate-400">Phần mềm:</span>
+              <span id="resProduct" class="font-bold text-emerald-400">AV_Civil</span>
+            </div>
+            <div class="flex justify-between items-center py-0.5 border-b border-slate-800/50">
+              <span class="text-slate-400">Khách hàng:</span>
+              <span id="resCustomer" class="font-semibold text-white">-</span>
+            </div>
+            <div class="flex justify-between items-center py-0.5 border-b border-slate-800/50">
+              <span class="text-slate-400">Mã HWID:</span>
+              <span id="resHwid" class="font-mono text-brand-300 text-[11px] truncate max-w-[200px]">-</span>
+            </div>
+            <div class="flex justify-between items-center py-0.5">
+              <span class="text-slate-400">Thời hạn:</span>
+              <span class="font-bold text-amber-300">Vĩnh Viễn (Perpetual)</span>
+            </div>
+          </div>
+
+          <!-- Action buttons for downloading / sharing -->
+          <div class="space-y-2">
+            <!-- Dynamic Download Container (supports single or combo buttons) -->
+            <div id="resultActionButtons" class="space-y-2">
+              <button type="button" onclick="downloadLicenseFile()" 
+                class="w-full py-3.5 px-4 bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white font-bold rounded-xl shadow-lg shadow-emerald-600/25 transition flex items-center justify-center gap-2 text-sm cursor-pointer">
+                <i data-lucide="download" class="w-4 h-4"></i>
+                <span id="btnDownloadLabel">Tải Lại File Bản Quyền (.avlic)</span>
               </button>
             </div>
 
-          </div>
-
-          <!-- Right Column: Generated License Result & Preview (5 cols on desktop) -->
-          <div class="lg:col-span-5 space-y-6">
-
-            <!-- Result Card (Shown after signing or placeholder) -->
-            <div id="licenseResultCard" class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-sm sticky top-24">
-              
-              <div class="flex items-center justify-between pb-3 border-b border-slate-800">
-                <div class="flex items-center gap-2">
-                  <div class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
-                    <i data-lucide="shield-check" class="w-5 h-5"></i>
-                  </div>
-                  <div>
-                    <h3 class="text-sm font-bold text-white">Kết Quả Giấy Phép</h3>
-                    <p class="text-[11px] text-slate-400" id="resStatusSub">Chưa tạo giấy phép</p>
-                  </div>
-                </div>
-                <span id="resBadge" class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 border border-slate-700">Chờ lệnh</span>
-              </div>
-
-              <!-- Placeholder when no license yet -->
-              <div id="resultPlaceholder" class="py-12 text-center text-slate-500 space-y-2">
-                <div class="w-12 h-12 rounded-2xl bg-slate-800/80 mx-auto flex items-center justify-center text-slate-600">
-                  <i data-lucide="file-badge" class="w-6 h-6"></i>
-                </div>
-                <p class="text-sm font-medium">Chưa có Giấy phép nào được tạo</p>
-                <p class="text-xs text-slate-600 max-w-xs mx-auto">Điền thông tin và bấm nút <strong class="text-slate-400">"Ký Số RSA-2048"</strong> để xuất file bản quyền.</p>
-              </div>
-
-              <!-- Live Active License Details (Initially Hidden) -->
-              <div id="resultDetails" class="hidden space-y-4 pt-4">
-
-                <!-- Signature Verification Alert -->
-                <div class="p-3 bg-emerald-500/10 border border-emerald-500/30 rounded-xl flex items-center gap-2.5 text-xs text-emerald-300">
-                  <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 flex-shrink-0"></i>
-                  <span>Chữ ký số hợp lệ 100% (Thuật toán RSASSA-PKCS1-v1_5 SHA-256)</span>
-                </div>
-
-                <!-- Info Table -->
-                <div class="bg-slate-950 rounded-xl p-3.5 border border-slate-800/80 text-xs space-y-2">
-                  <div class="flex justify-between items-center py-1 border-b border-slate-800/60">
-                    <span class="text-slate-400">Phần mềm:</span>
-                    <span id="resProduct" class="font-semibold text-blue-400">AVRoad 2026 (TDT 9.1)</span>
-                  </div>
-                  <div class="flex justify-between items-center py-1 border-b border-slate-800/60">
-                    <span class="text-slate-400">Mã License:</span>
-                    <span id="resLicId" class="font-mono font-semibold text-brand-300">LIC-000000</span>
-                  </div>
-                  <div class="flex justify-between items-center py-1 border-b border-slate-800/60">
-                    <span class="text-slate-400">Khách hàng:</span>
-                    <span id="resCustomer" class="font-medium text-white">-</span>
-                  </div>
-                  <div class="flex justify-between items-center py-1 border-b border-slate-800/60">
-                    <span class="text-slate-400">HWID:</span>
-                    <span id="resHwid" class="font-mono text-slate-300 text-[11px] truncate max-w-[180px]">-</span>
-                  </div>
-                  <div class="flex justify-between items-center py-1 border-b border-slate-800/60">
-                    <span class="text-slate-400">Gói Module:</span>
-                    <span id="resModules" class="text-brand-400 font-medium">-</span>
-                  </div>
-                  <div class="flex justify-between items-center py-1 border-b border-slate-800/60">
-                    <span class="text-slate-400">Ngày Cấp:</span>
-                    <span id="resIssueDate" class="text-slate-300">-</span>
-                  </div>
-                  <div class="flex justify-between items-center py-1 border-b border-slate-800/60">
-                    <span class="text-slate-400">Hạn Dùng:</span>
-                    <span id="resExpiryDate" class="font-semibold text-emerald-400">-</span>
-                  </div>
-                  <div class="flex justify-between items-center py-1">
-                    <span class="text-slate-400">Hạn Cập Nhật:</span>
-                    <span id="resUpdateExpiryDate" class="text-indigo-400">-</span>
-                  </div>
-                </div>
-
-                <!-- Action Download Buttons -->
-                <div class="space-y-2 pt-2">
-                  
-                  <!-- Main Download Button -->
-                  <button type="button" onclick="downloadLicenseFile()" 
-                    class="w-full py-3.5 px-4 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl shadow-lg shadow-emerald-600/25 transition flex items-center justify-center gap-2 text-sm">
-                    <i data-lucide="download" class="w-4 h-4"></i>
-                    <span>Tải File AV_License.avlic</span>
-                  </button>
-
-                  <!-- Secondary Mobile Share & Copy Buttons -->
-                  <div class="grid grid-cols-2 gap-2">
-                    <button type="button" onclick="shareLicenseFile()" id="btnShareFile" 
-                      class="py-2.5 px-3 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-xl border border-slate-700 flex items-center justify-center gap-1.5 transition">
-                      <i data-lucide="share-2" class="w-3.5 h-3.5 text-brand-400"></i>
-                      <span>Gửi Zalo / Chia sẻ</span>
-                    </button>
-                    <button type="button" onclick="copyLicenseBase64()" 
-                      class="py-2.5 px-3 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-xl border border-slate-700 flex items-center justify-center gap-1.5 transition">
-                      <i data-lucide="copy" class="w-3.5 h-3.5 text-indigo-400"></i>
-                      <span>Copy JSON Base64</span>
-                    </button>
-                  </div>
-
-                  <!-- Inspect Signature Details trigger -->
-                  <button type="button" onclick="toggleInspector()" 
-                    class="w-full text-center py-2 text-xs text-slate-400 hover:text-slate-200 flex items-center justify-center gap-1">
-                    <i data-lucide="code-2" class="w-3.5 h-3.5"></i>
-                    <span>Xem mã Payload JSON & Chữ ký số</span>
-                  </button>
-
-                  <div id="inspectorArea" class="hidden mt-2 p-3 bg-slate-950 rounded-xl border border-slate-800 text-[11px] font-mono text-slate-300 max-h-48 overflow-y-auto">
-                    <pre id="inspectorContent" class="whitespace-pre-wrap break-all"></pre>
-                  </div>
-
-                </div>
-
-              </div>
-
+            <div class="grid grid-cols-2 gap-2 pt-1">
+              <button type="button" onclick="shareLicenseFile()" id="btnShareFile" 
+                class="py-3 px-3 bg-slate-800 hover:bg-slate-700 active:bg-slate-900 text-slate-200 text-xs sm:text-sm font-semibold rounded-xl border border-slate-700 flex items-center justify-center gap-1.5 transition cursor-pointer">
+                <i data-lucide="share-2" class="w-4 h-4 text-emerald-400"></i>
+                <span>Gửi Zalo</span>
+              </button>
+              <button type="button" onclick="copyLicenseBase64()" 
+                class="py-3 px-3 bg-slate-800 hover:bg-slate-700 active:bg-slate-900 text-slate-200 text-xs sm:text-sm font-semibold rounded-xl border border-slate-700 flex items-center justify-center gap-1.5 transition cursor-pointer">
+                <i data-lucide="copy" class="w-4 h-4 text-indigo-400"></i>
+                <span>Copy JSON</span>
+              </button>
             </div>
 
-          </div>
+            <!-- Inspect Signature Details toggle -->
+            <button type="button" onclick="toggleInspector()" 
+              class="w-full text-center py-1.5 text-xs text-slate-500 hover:text-slate-300 flex items-center justify-center gap-1 cursor-pointer">
+              <i data-lucide="code-2" class="w-3.5 h-3.5"></i>
+              <span>Xem chi tiết Payload JSON & Chữ ký</span>
+            </button>
 
+            <div id="inspectorArea" class="hidden mt-2 p-3 bg-slate-950 rounded-xl border border-slate-800 text-[11px] font-mono text-slate-300 max-h-48 overflow-y-auto">
+              <pre id="inspectorContent" class="whitespace-pre-wrap break-all"></pre>
+            </div>
+          </div>
         </div>
 
       </section>
@@ -738,20 +535,15 @@
             <span>📋 Tất Cả Phần Mềm</span>
             <span id="badgeCountAll" class="px-2 py-0.5 rounded-full bg-black/30 text-[10px] text-white font-mono">0</span>
           </button>
-          <button type="button" id="regProdFilter-AV_CIVIL" onclick="setRegistryProductFilter('AV_CIVIL')" 
-            class="reg-prod-tab px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 whitespace-nowrap bg-slate-950/60 hover:bg-slate-800 text-slate-400 cursor-pointer">
-            <span>🏗️ AV Civil 3D</span>
-            <span id="badgeCountAvcivil" class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-[10px] text-emerald-300 font-mono">0</span>
-          </button>
           <button type="button" id="regProdFilter-AVROAD_TDT91" onclick="setRegistryProductFilter('AVROAD_TDT91')" 
             class="reg-prod-tab px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 whitespace-nowrap bg-slate-950/60 hover:bg-slate-800 text-slate-400 cursor-pointer">
-            <span>🛣️ AVRoad / TDT 9.1</span>
+            <span>🛣️ AVRoad 2026 (TDT 9.1)</span>
             <span id="badgeCountAvroad" class="px-2 py-0.5 rounded-full bg-blue-500/20 text-[10px] text-blue-300 font-mono">0</span>
           </button>
-          <button type="button" id="regProdFilter-ALL_COMBO" onclick="setRegistryProductFilter('ALL_COMBO')" 
+          <button type="button" id="regProdFilter-AV_CIVIL" onclick="setRegistryProductFilter('AV_CIVIL')" 
             class="reg-prod-tab px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 whitespace-nowrap bg-slate-950/60 hover:bg-slate-800 text-slate-400 cursor-pointer">
-            <span>⚡ Trọn Gói Cả 2</span>
-            <span id="badgeCountCombo" class="px-2 py-0.5 rounded-full bg-purple-500/20 text-[10px] text-purple-300 font-mono">0</span>
+            <span>🏗️ AV_Civil (Civil 3D)</span>
+            <span id="badgeCountAvcivil" class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-[10px] text-emerald-300 font-mono">0</span>
           </button>
         </div>
 
@@ -876,53 +668,16 @@
                 Quản Lý Cập Nhật Phiên Bản (Releases & OTA Updates)
               </h1>
               <p class="text-sm text-slate-400 mt-1">
-                Theo dõi phiên bản trực tuyến hiện tại trên GitHub và phát hành bản cập nhật mới tức thì cho người dùng AV Civil 3D và AVRoad / TDT 9.1.
+                Theo dõi phiên bản trực tuyến hiện tại trên GitHub và phát hành bản cập nhật mới tức thì cho toàn bộ người dùng AV Civil 3D & AVRoad.
               </p>
             </div>
             <div class="flex items-center gap-2">
               <button onclick="fetchCurrentReleaseInfo(true)" type="button" 
-                class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-xl border border-slate-700 flex items-center gap-1.5 transition shadow-sm cursor-pointer">
+                class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-xl border border-slate-700 flex items-center gap-1.5 transition shadow-sm">
                 <i data-lucide="refresh-cw" class="w-3.5 h-3.5 text-amber-400"></i>
                 Làm Mới Trạng Thái
               </button>
             </div>
-          </div>
-        </div>
-
-        <!-- Product Sub-tabs for Updates (Tab con 1: AV Civil 3D, Tab con 2: AVRoad / TDT 9.1) -->
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-3 shadow-sm">
-          <div class="flex items-center justify-between mb-3 px-1">
-            <span class="text-xs font-semibold uppercase tracking-wider text-slate-400 flex items-center gap-2">
-              <i data-lucide="layers" class="w-4 h-4 text-amber-400"></i>
-              Chọn Phần Mềm Quản Lý Cập Nhật
-            </span>
-            <span id="activeUpdateRepoBadge" class="text-xs px-2.5 py-0.5 rounded-full font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-              repo: tienhoaa/AV_Releases
-            </span>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <!-- Subtab 1: AV Civil 3D (repo: tienhoaa/AV_Releases) -->
-            <button type="button" id="subtabUpdateAvcivil" onclick="selectUpdateProduct('AV_CIVIL')"
-              class="update-subtab active flex items-center gap-3 py-3 px-4 rounded-xl border border-emerald-500 bg-emerald-500/10 text-emerald-300 font-semibold text-xs sm:text-sm transition-all duration-200 cursor-pointer text-left shadow-sm">
-              <span class="text-2xl p-2 rounded-lg bg-emerald-500/20 text-emerald-300 shrink-0">🏗️</span>
-              <div class="min-w-0">
-                <div class="font-bold text-white text-sm">AV Civil 3D</div>
-                <div class="text-[11px] text-emerald-400 font-mono">repo: tienhoaa/AV_Releases</div>
-                <div class="text-[10px] text-slate-400 mt-0.5">AV Tools - Thoát nước, Đường, 3D</div>
-              </div>
-            </button>
-
-            <!-- Subtab 2: AVRoad / TDT 9.1 (repo: tienhoaa/AVRoad) -->
-            <button type="button" id="subtabUpdateAvroad" onclick="selectUpdateProduct('AVROAD_TDT91')"
-              class="update-subtab flex items-center gap-3 py-3 px-4 rounded-xl border border-slate-800 bg-slate-950/60 hover:bg-slate-800 text-slate-400 font-semibold text-xs sm:text-sm transition-all duration-200 cursor-pointer text-left">
-              <span class="text-2xl p-2 rounded-lg bg-blue-500/20 text-blue-300 shrink-0">🛣️</span>
-              <div class="min-w-0">
-                <div class="font-bold text-slate-200 text-sm">AVRoad / TDT 9.1</div>
-                <div class="text-[11px] text-blue-400 font-mono">repo: tienhoaa/AVRoad</div>
-                <div class="text-[10px] text-slate-400 mt-0.5">Thiết kế đường, San nền, Khảo sát</div>
-              </div>
-            </button>
           </div>
         </div>
 
@@ -935,7 +690,7 @@
             <div class="flex items-center justify-between">
               <span class="text-xs font-semibold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
                 <i data-lucide="tag" class="w-3.5 h-3.5 text-amber-400"></i>
-                <span id="currentVersionCardTitle">Phiên Bản Online (AV Civil 3D)</span>
+                Phiên Bản Online
               </span>
               <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
@@ -961,7 +716,7 @@
               </span>
               <a id="currentDownloadLink" href="https://github.com/tienhoaa/AV_Releases/releases/download/v1.0.1/AVTools_latest.zip" target="_blank"
                 class="text-xs text-brand-400 hover:text-brand-300 flex items-center gap-1 transition">
-                <span>Tải Thử File Package</span> <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                <span>Tải Thử File Zip</span> <i data-lucide="download" class="w-3.5 h-3.5"></i>
               </a>
             </div>
             <div>
@@ -972,7 +727,7 @@
                   <i data-lucide="copy" class="w-3.5 h-3.5"></i>
                 </button>
               </div>
-              <p id="currentDownloadUrlNote" class="text-[11px] text-slate-500 mt-2 flex items-center gap-1">
+              <p class="text-[11px] text-slate-500 mt-2 flex items-center gap-1">
                 <i data-lucide="info" class="w-3 h-3 text-brand-400"></i>
                 Plugin Civil 3D sẽ tải file zip từ link này khi người dùng xác nhận cập nhật tự động.
               </p>
@@ -988,7 +743,7 @@
               <i data-lucide="file-text" class="w-3.5 h-3.5 text-amber-400"></i>
               Nội Dung Nhật Ký Phiên Bản Hiện Tại (Current Changelog)
             </span>
-            <span id="currentChangelogFileLabel" class="text-[11px] text-slate-500 font-mono">version.json</span>
+            <span class="text-[11px] text-slate-500 font-mono">version.json</span>
           </div>
           <div id="currentChangelogDisplay" class="p-3.5 bg-slate-950 border border-slate-800/80 rounded-xl text-xs text-slate-300 whitespace-pre-wrap leading-relaxed font-sans">
             Đang tải thông tin từ GitHub...
@@ -1002,10 +757,10 @@
               <span class="w-6 h-6 rounded-lg bg-amber-500/20 text-amber-300 text-xs flex items-center justify-center font-bold">
                 <i data-lucide="send" class="w-3.5 h-3.5"></i>
               </span>
-              <span id="updateFormHeaderTitle">Phát Hành Bản Cập Nhật Mới Cho AV Civil 3D</span>
+              Phát Hành Bản Cập Nhật Mới Lên GitHub
             </h2>
             <p class="text-xs text-slate-400 mt-1">
-              Nhập số phiên bản và nội dung cải tiến. Hệ thống sẽ tự động cập nhật file <code class="text-amber-300 font-mono">version.json</code> trên GitHub repo <strong id="updateTargetRepoLabel" class="text-white font-mono">tienhoaa/AV_Releases</strong>.
+              Nhập số phiên bản và nội dung cải tiến. Hệ thống sẽ tự động cập nhật file <code class="text-amber-300 font-mono">version.json</code> trên GitHub repo <strong class="text-white">tienhoaa/AV_Releases</strong>.
             </p>
           </div>
 
@@ -1015,7 +770,7 @@
             <div class="md:col-span-5 space-y-2">
               <label class="block text-xs font-medium text-slate-300 flex items-center justify-between">
                 <span>Số Phiên Bản Mới (Version) <span class="text-rose-400">*</span></span>
-                <span class="text-[11px] text-slate-500">Định dạng X.Y.Z hoặc X.Y.Z.W</span>
+                <span class="text-[11px] text-slate-500">Định dạng X.Y.Z</span>
               </label>
               <div class="relative">
                 <input type="text" id="updateNewVersion" placeholder="1.0.2" oninput="handleVersionInputChange()"
@@ -1023,15 +778,15 @@
               </div>
 
               <!-- Quick increment buttons -->
-              <div class="flex items-center gap-1.5 pt-1 flex-wrap">
+              <div class="flex items-center gap-1.5 pt-1">
                 <span class="text-[11px] text-slate-500">Tăng nhanh:</span>
-                <button type="button" onclick="autoBumpVersion('patch')" class="px-2 py-0.5 bg-slate-800 hover:bg-slate-700 text-[11px] text-amber-300 rounded border border-slate-700 transition cursor-pointer">
+                <button type="button" onclick="autoBumpVersion('patch')" class="px-2 py-0.5 bg-slate-800 hover:bg-slate-700 text-[11px] text-amber-300 rounded border border-slate-700 transition">
                   +0.0.1 (Vá lỗi)
                 </button>
-                <button type="button" onclick="autoBumpVersion('minor')" class="px-2 py-0.5 bg-slate-800 hover:bg-slate-700 text-[11px] text-amber-300 rounded border border-slate-700 transition cursor-pointer">
+                <button type="button" onclick="autoBumpVersion('minor')" class="px-2 py-0.5 bg-slate-800 hover:bg-slate-700 text-[11px] text-amber-300 rounded border border-slate-700 transition">
                   +0.1.0 (Tính năng)
                 </button>
-                <button type="button" onclick="autoBumpVersion('major')" class="px-2 py-0.5 bg-slate-800 hover:bg-slate-700 text-[11px] text-amber-300 rounded border border-slate-700 transition cursor-pointer">
+                <button type="button" onclick="autoBumpVersion('major')" class="px-2 py-0.5 bg-slate-800 hover:bg-slate-700 text-[11px] text-amber-300 rounded border border-slate-700 transition">
                   +1.0.0 (Bản lớn)
                 </button>
               </div>
@@ -1056,14 +811,12 @@
 
             <!-- Download URL (Full width) -->
             <div class="md:col-span-12 space-y-1.5">
-              <div class="flex items-center justify-between">
-                <label class="block text-xs font-medium text-slate-300">
-                  Đường Dẫn Tải Gói Cập Nhật (Download URL) <span class="text-rose-400">*</span>
-                </label>
-                <button type="button" onclick="resetDefaultDownloadUrl()" class="text-[11px] text-amber-400 hover:underline cursor-pointer">
-                  Khôi phục URL mặc định
+              <label class="block text-xs font-medium text-slate-300 flex items-center justify-between">
+                <span>Đường Dẫn Tải Gói Cập Nhật (Download URL) <span class="text-rose-400">*</span></span>
+                <button type="button" onclick="resetDefaultDownloadUrl()" class="text-[11px] text-amber-400 hover:underline">
+                  Khôi phục URL GitHub Release mặc định
                 </button>
-              </div>
+              </label>
               <input type="text" id="updateDownloadUrl" placeholder="https://github.com/tienhoaa/AV_Releases/releases/download/v1.0.2/AVTools_latest.zip"
                 class="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-slate-200 font-mono text-xs focus:outline-none focus:ring-2 focus:ring-amber-500">
             </div>
@@ -1076,13 +829,13 @@
                 </label>
                 <!-- Quick tags -->
                 <div class="flex items-center gap-1">
-                  <button type="button" onclick="insertChangelogTag('[Sửa lỗi] ')" class="px-2 py-0.5 bg-slate-800 hover:bg-slate-700 text-[10px] text-rose-300 rounded border border-slate-700 transition cursor-pointer">
+                  <button type="button" onclick="insertChangelogTag('[Sửa lỗi] ')" class="px-2 py-0.5 bg-slate-800 hover:bg-slate-700 text-[10px] text-rose-300 rounded border border-slate-700 transition">
                     + [Sửa lỗi]
                   </button>
-                  <button type="button" onclick="insertChangelogTag('[Tính năng] ')" class="px-2 py-0.5 bg-slate-800 hover:bg-slate-700 text-[10px] text-emerald-300 rounded border border-slate-700 transition cursor-pointer">
+                  <button type="button" onclick="insertChangelogTag('[Tính năng] ')" class="px-2 py-0.5 bg-slate-800 hover:bg-slate-700 text-[10px] text-emerald-300 rounded border border-slate-700 transition">
                     + [Tính năng]
                   </button>
-                  <button type="button" onclick="insertChangelogTag('[Tối ưu] ')" class="px-2 py-0.5 bg-slate-800 hover:bg-slate-700 text-[10px] text-blue-300 rounded border border-slate-700 transition cursor-pointer">
+                  <button type="button" onclick="insertChangelogTag('[Tối ưu] ')" class="px-2 py-0.5 bg-slate-800 hover:bg-slate-700 text-[10px] text-blue-300 rounded border border-slate-700 transition">
                     + [Tối ưu]
                   </button>
                 </div>
@@ -1099,7 +852,7 @@
             <div class="text-xs text-amber-200/90 leading-relaxed space-y-1">
               <p class="font-semibold text-amber-300">Tác động tức thì tới toàn bộ máy người dùng:</p>
               <p>
-                Khi bấm <strong>PHÁT HÀNH</strong>, file <code class="font-mono bg-slate-900 px-1 py-0.5 rounded text-amber-300">version.json</code> trên GitHub repo đích (<span id="alertRepoDest" class="font-mono text-white">tienhoaa/AV_Releases</span>) sẽ được cập nhật phiên bản mới.
+                Khi bấm <strong>PHÁT HÀNH</strong>, file <code class="font-mono bg-slate-900 px-1 py-0.5 rounded text-amber-300">version.json</code> trên GitHub sẽ được ghi đè phiên bản mới.
                 Tất cả máy kỹ sư đang mở AutoCAD / Civil 3D khi khởi động hoặc chạy lệnh kiểm tra sẽ nhận được thông báo mời cập nhật ngay lập tức!
               </p>
             </div>
@@ -1109,7 +862,7 @@
           <button type="button" id="btnPublishRelease" onclick="publishNewRelease()"
             class="w-full py-4 px-6 bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-400 hover:to-orange-400 active:scale-[0.99] text-white font-bold text-sm sm:text-base rounded-xl shadow-xl shadow-amber-500/25 transition duration-150 flex items-center justify-center gap-3 cursor-pointer">
             <i data-lucide="rocket" class="w-5 h-5 animate-bounce"></i>
-            <span id="btnPublishReleaseText">PHÁT HÀNH BẢN CẬP NHẬT CHO AV CIVIL 3D</span>
+            <span>PHÁT HÀNH BẢN CẬP NHẬT LÊN GITHUB</span>
           </button>
 
         </div>
@@ -1392,10 +1145,9 @@ oQIDAQAB
     let currentPublicKey = null;
     let activeLicenseObject = null;
     let activeLicenseFileName = "AV_License.avlic";
-    let currentProductCode = "AV_CIVIL";
-    let currentSoftware = "AV_Civil";
+    let comboLicenses = null;
+    let currentProductCode = "AVROAD_TDT91";
     let registryProductFilter = "ALL";
-    let currentUpdateProduct = "AV_CIVIL"; // 'AV_CIVIL' (tienhoaa/AV_Releases) or 'AVROAD_TDT91' (tienhoaa/AVRoad)
 
     // ==================== INITIALIZATION & AUTH ====================
     window.addEventListener('DOMContentLoaded', async () => {
@@ -1498,84 +1250,33 @@ oQIDAQAB
       lucide.createIcons();
     }
 
-    // ==================== DATE HELPERS ====================
-    function initializeDefaultDates() {
-      const today = new Date();
-      const oneYearLater = new Date();
-      oneYearLater.setFullYear(today.getFullYear() + 1);
-
-      document.getElementById('licExpiryDate').value = formatDateISO(oneYearLater);
-      document.getElementById('licUpdateExpiryDate').value = formatDateISO(oneYearLater);
-    }
-
+    // ==================== DATE & COMPATIBILITY HELPERS ====================
     function formatDateISO(d) {
       return d.toISOString().split('T')[0];
     }
+    function initializeDefaultDates() {}
+    function setPresetDuration() {}
+    function setPermanentDuration() {}
+    function handlePermanentToggle() {}
+    function handleSyncUpdateToggle() {}
+    function handleModuleAllToggle() {}
+    function selectAllModules() {}
+    function getSelectedModules() { return ["ALL"]; }
 
-    function setPresetDuration(months) {
-      const permCheck = document.getElementById('licIsPermanent');
-      permCheck.checked = false;
-      document.getElementById('licExpiryDate').disabled = false;
-
-      const target = new Date();
-      target.setMonth(target.getMonth() + months);
-      const isoStr = formatDateISO(target);
-
-      document.getElementById('licExpiryDate').value = isoStr;
-      if (document.getElementById('syncUpdateDate').checked) {
-        document.getElementById('licUpdateExpiryDate').value = isoStr;
-      }
-
-      document.querySelectorAll('.duration-btn').forEach(btn => {
-        btn.classList.remove('active-duration', 'bg-brand-600/20', 'border-brand-500', 'text-brand-300');
-        btn.classList.add('bg-slate-950', 'text-slate-200');
-      });
-      event?.currentTarget?.classList.add('active-duration', 'bg-brand-600/20', 'border-brand-500', 'text-brand-300');
-      event?.currentTarget?.classList.remove('bg-slate-950', 'text-slate-200');
-    }
-
-    function setPermanentDuration() {
-      const permCheck = document.getElementById('licIsPermanent');
-      permCheck.checked = true;
-      handlePermanentToggle(permCheck);
-
-      const oneYear = new Date();
-      oneYear.setFullYear(oneYear.getFullYear() + 1);
-      document.getElementById('licUpdateExpiryDate').value = formatDateISO(oneYear);
-      document.getElementById('syncUpdateDate').checked = false;
-    }
-
-    function handlePermanentToggle(checkbox) {
-      const expiryInput = document.getElementById('licExpiryDate');
-      if (checkbox.checked) {
-        expiryInput.value = '9999-12-31';
-        expiryInput.disabled = true;
-      } else {
-        expiryInput.disabled = false;
-        initializeDefaultDates();
-      }
-    }
-
-    function handleSyncUpdateToggle(checkbox) {
-      if (checkbox.checked) {
-        document.getElementById('licUpdateExpiryDate').value = document.getElementById('licExpiryDate').value;
-      }
-    }
-
-    // ==================== REQUEST FILE IMPORT ====================
+    // ==================== REQUEST FILE & ZALO PARSER ====================
     function handleDragOver(e) {
       e.preventDefault();
-      document.getElementById('dropzone').classList.add('border-brand-400', 'bg-brand-500/10');
+      document.getElementById('dropzone')?.classList.add('border-emerald-400', 'bg-emerald-500/10');
     }
 
     function handleDragLeave(e) {
       e.preventDefault();
-      document.getElementById('dropzone').classList.remove('border-brand-400', 'bg-brand-500/10');
+      document.getElementById('dropzone')?.classList.remove('border-emerald-400', 'bg-emerald-500/10');
     }
 
     function handleFileDrop(e) {
       e.preventDefault();
-      document.getElementById('dropzone').classList.remove('border-brand-400', 'bg-brand-500/10');
+      document.getElementById('dropzone')?.classList.remove('border-emerald-400', 'bg-emerald-500/10');
       if (e.dataTransfer.files && e.dataTransfer.files[0]) {
         parseRequestFile(e.dataTransfer.files[0]);
       }
@@ -1592,78 +1293,129 @@ oQIDAQAB
       reader.onload = (e) => {
         try {
           const content = e.target.result;
-          const json = JSON.parse(content);
-          populateRequestData(json);
-          showToast(`Đã nhận diện: ${file.name}`, 'success');
+          parseRequestText(content, file.name);
         } catch (err) {
-          showToast('File không đúng định dạng JSON/AVREQ hợp lệ!', 'error');
+          showToast('Lỗi khi đọc file: ' + err.message, 'error');
         }
       };
       reader.readAsText(file, 'UTF-8');
     }
 
-    function togglePasteArea() {
-      const area = document.getElementById('pasteArea');
-      area.classList.toggle('hidden');
+    function parseRequestText(raw, sourceFileName = '') {
+      if (!raw || !raw.trim()) return;
+      raw = raw.trim();
+
+      // Try parsing JSON first
+      try {
+        const json = JSON.parse(raw);
+        populateRequestData(json);
+        if (sourceFileName) {
+          const fileNameLabel = document.getElementById('uploadedFileName');
+          if (fileNameLabel) fileNameLabel.textContent = `File: ${sourceFileName}`;
+        }
+        return;
+      } catch (e) {
+        // Not valid JSON, parse freeform text (like Zalo messages)
+        let hwid = '';
+        let customer = '';
+
+        const hwidMatch = raw.match(/AV-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}/i) ||
+                          raw.match(/[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}/i) ||
+                          raw.match(/(?:hwid|mã máy|mã thiết bị)[:\s=]+([A-Z0-9\-_]+)/i);
+        if (hwidMatch) {
+          hwid = (hwidMatch[1] || hwidMatch[0]).trim().toUpperCase();
+        }
+
+        const nameMatch = raw.match(/(?:khách hàng|khách|họ và tên|họ tên|tên|user|customer)[:\s=]+([^\n\r,]+)/i);
+        if (nameMatch) {
+          customer = nameMatch[1].trim();
+        }
+
+        if (hwid || customer) {
+          populateRequestData({ hwid, customer_name: customer });
+          showToast('Đã bóc tách HWID & Tên từ nội dung Zalo!', 'success');
+          return;
+        }
+      }
+      showToast('Không tìm thấy thông tin HWID trong nội dung vừa dán!', 'error');
     }
 
-    function handlePasteParse() {
-      const text = document.getElementById('pasteJsonInput').value.trim();
-      if (!text) return;
-      try {
-        const json = JSON.parse(text);
-        populateRequestData(json);
-        document.getElementById('pasteArea').classList.add('hidden');
-        document.getElementById('pasteJsonInput').value = '';
-        showToast('Đã nạp thông tin thành công!', 'success');
-      } catch (err) {
-        showToast('Nội dung dán không phải là JSON hợp lệ!', 'error');
+    function togglePasteArea() {
+      const area = document.getElementById('pasteArea');
+      if (area) {
+        area.classList.toggle('hidden');
+        if (!area.classList.contains('hidden')) {
+          document.getElementById('pasteJsonInput')?.focus();
+        }
       }
     }
 
+    function handlePasteParse() {
+      const text = document.getElementById('pasteJsonInput')?.value || '';
+      if (!text.trim()) {
+        showToast('Vui lòng dán nội dung vào ô!', 'warning');
+        return;
+      }
+      parseRequestText(text);
+      document.getElementById('pasteArea')?.classList.add('hidden');
+      document.getElementById('pasteJsonInput').value = '';
+    }
+
+    function handleQuickPasteInput(textarea) {
+      const val = textarea.value.trim();
+      if ((val.startsWith('{') && val.endsWith('}')) || /AV-[A-Z0-9]{4}-[A-Z0-9]{4}/i.test(val)) {
+        setTimeout(() => handlePasteParse(), 250);
+      }
+    }
+
+    function resetUploadedFile(e) {
+      if (e) e.stopPropagation();
+      const fileBadge = document.getElementById('uploadedFileBadge');
+      if (fileBadge) fileBadge.classList.add('hidden');
+      const fileInput = document.getElementById('fileInput');
+      if (fileInput) fileInput.value = '';
+    }
+
+    // ==================== PRODUCT SELECTION ====================
     function selectProduct(code) {
-      const tabAvcivil = document.getElementById('tabProductAvcivil');
-      const tabAvroad = document.getElementById('tabProductAvroad');
+      currentProductCode = code;
+      const tabCivil = document.getElementById('tabProductAvcivil');
+      const tabRoad = document.getElementById('tabProductAvroad');
       const tabCombo = document.getElementById('tabProductCombo');
       const badge = document.getElementById('activeProductBadge');
 
-      if (!tabAvcivil || !tabAvroad) return;
+      const baseClass = "product-tab flex flex-col items-center justify-center p-3 sm:p-4 rounded-2xl border transition-all duration-200 cursor-pointer min-h-[72px] select-none";
+      const inactiveClass = `${baseClass} border-slate-800 bg-slate-950/70 hover:bg-slate-800/60 text-slate-400`;
 
-      const baseInactive = 'product-tab flex items-start gap-3 py-3 px-4 rounded-xl border border-slate-800 bg-slate-950/60 hover:bg-slate-800/50 text-slate-400 font-semibold text-xs sm:text-sm transition-all duration-200 cursor-pointer text-left';
-      tabAvcivil.className = baseInactive;
-      tabAvroad.className = baseInactive;
-      if (tabCombo) tabCombo.className = baseInactive;
+      if (tabCivil) tabCivil.className = inactiveClass;
+      if (tabRoad) tabRoad.className = inactiveClass;
+      if (tabCombo) tabCombo.className = inactiveClass;
 
-      if (code === 'TDT_ROAD' || code === 'AVROAD_TDT91') {
-        currentProductCode = 'AVROAD_TDT91';
-        currentSoftware = 'TDT_Road';
-        tabAvroad.className = 'product-tab active flex items-start gap-3 py-3 px-4 rounded-xl border border-blue-500 bg-blue-500/10 text-blue-300 font-semibold text-xs sm:text-sm transition-all duration-200 shadow-sm cursor-pointer text-left';
+      if (code === 'AVROAD_TDT91') {
+        if (tabRoad) tabRoad.className = `${baseClass} border-blue-500 bg-blue-500/15 text-white ring-2 ring-blue-500/30 shadow-lg shadow-blue-500/10`;
         if (badge) {
-          badge.textContent = 'AVRoad / TDT 9.1 (Thiết kế đường, San nền, Khảo sát)';
-          badge.className = 'text-xs px-2.5 py-0.5 rounded-full font-bold bg-blue-500/20 text-blue-300 border border-blue-500/30';
+          badge.textContent = 'AVRoad (TDT 9.1)';
+          badge.className = 'text-[11px] px-2.5 py-0.5 rounded-full font-bold bg-blue-500/20 text-blue-300 border border-blue-500/30';
         }
-      } else if (code === 'ALL') {
-        currentProductCode = 'ALL';
-        currentSoftware = 'ALL';
-        if (tabCombo) tabCombo.className = 'product-tab active flex items-start gap-3 py-3 px-4 rounded-xl border border-purple-500 bg-purple-500/10 text-purple-300 font-semibold text-xs sm:text-sm transition-all duration-200 shadow-sm cursor-pointer text-left';
+      } else if (code === 'COMBO') {
+        if (tabCombo) tabCombo.className = `${baseClass} border-amber-500 bg-amber-500/15 text-white ring-2 ring-amber-500/30 shadow-lg shadow-amber-500/10`;
         if (badge) {
-          badge.textContent = 'Trọn Gói Cả 2 (AV Civil 3D + AVRoad TDT 9.1)';
-          badge.className = 'text-xs px-2.5 py-0.5 rounded-full font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30';
+          badge.textContent = 'Combo: Civil + AVRoad';
+          badge.className = 'text-[11px] px-2.5 py-0.5 rounded-full font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30';
         }
       } else {
         currentProductCode = 'AV_CIVIL';
-        currentSoftware = 'AV_Civil';
-        tabAvcivil.className = 'product-tab active flex items-start gap-3 py-3 px-4 rounded-xl border border-emerald-500 bg-emerald-500/10 text-emerald-300 font-semibold text-xs sm:text-sm transition-all duration-200 shadow-sm cursor-pointer text-left';
+        if (tabCivil) tabCivil.className = `${baseClass} border-emerald-500 bg-emerald-500/15 text-white ring-2 ring-emerald-500/30 shadow-lg shadow-emerald-500/10`;
         if (badge) {
-          badge.textContent = 'AV Civil 3D (AV Tools - Thoát nước, Đường, 3D)';
-          badge.className = 'text-xs px-2.5 py-0.5 rounded-full font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30';
+          badge.textContent = 'AV_Civil (Civil 3D)';
+          badge.className = 'text-[11px] px-2.5 py-0.5 rounded-full font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30';
         }
       }
     }
 
     function setRegistryProductFilter(prod) {
       registryProductFilter = prod;
-      ['ALL', 'AV_CIVIL', 'AVROAD_TDT91', 'ALL_COMBO'].forEach(id => {
+      ['ALL', 'AVROAD_TDT91', 'AV_CIVIL'].forEach(id => {
         const btn = document.getElementById('regProdFilter-' + id);
         if (btn) {
           if (id === prod) {
@@ -1677,76 +1429,70 @@ oQIDAQAB
     }
 
     function populateRequestData(data) {
-      // Nhận diện phần mềm từ file .avreq
+      if (!data) return;
+
       let detectedProduct = currentProductCode;
-      let productName = 'AV Civil 3D';
+      let productName = 'AV_Civil (Civil 3D)';
 
-      const sw = (data.software || '').toUpperCase();
-      const code = (data.software_code || '').toUpperCase();
-      const app = (data.app_name || '').toLowerCase();
-      const prod = (data.product || '').toLowerCase();
-
-      if (sw === 'ALL' || code === 'ALL' || prod.includes('cả 2') || prod.includes('combo')) {
-        detectedProduct = 'ALL';
-        productName = 'Trọn Gói Cả 2 (AV Civil 3D + AVRoad TDT 9.1)';
-      } else if (sw === 'TDT_ROAD' || code === 'AVROAD_TDT91' || code === 'TDT_ROAD' ||
-                 app.includes('avroad') || app.includes('tdt') || prod.includes('avroad') || prod.includes('tdt')) {
-        detectedProduct = 'TDT_ROAD';
-        productName = 'AVRoad / TDT 9.1 (Thiết kế đường, San nền, Khảo sát)';
-      } else {
+      if (data.software_code === 'AV_CIVIL' || 
+          (data.app_name && data.app_name.toLowerCase().includes('civil')) || 
+          (data.product && data.product.toLowerCase().includes('civil'))) {
         detectedProduct = 'AV_CIVIL';
-        productName = 'AV Civil 3D (AV Tools - Thoát nước, Đường, 3D)';
+        productName = 'AV_Civil (Civil 3D)';
+      } else if (data.software_code === 'AVROAD_TDT91' || 
+                 (data.app_name && (data.app_name.toLowerCase().includes('avroad') || data.app_name.toLowerCase().includes('tdt'))) ||
+                 (data.product && (data.product.toLowerCase().includes('avroad') || data.product.toLowerCase().includes('tdt')))) {
+        detectedProduct = 'AVROAD_TDT91';
+        productName = 'AVRoad (TDT 9.1)';
       }
 
-      selectProduct(detectedProduct);
+      if (currentProductCode !== 'COMBO') {
+        selectProduct(detectedProduct);
+      }
 
-      if (data.hwid) document.getElementById('licHwid').value = data.hwid;
-      if (data.customer_name) document.getElementById('licCustomer').value = data.customer_name;
-      if (data.company) document.getElementById('licCompany').value = data.company;
-      if (data.machine_name) document.getElementById('licMachine').value = data.machine_name;
-      if (data.phone) document.getElementById('licPhone').value = data.phone;
+      const hwidVal = (data.hwid || data.hardware_id || '').trim().toUpperCase();
+      const custVal = (data.customer_name || data.customer || data.name || '').trim();
 
-      showToast(`Đã nhận diện phần mềm: ${productName}`, 'info');
+      if (hwidVal) {
+        document.getElementById('licHwid').value = hwidVal;
+      }
+      if (custVal) {
+        document.getElementById('licCustomer').value = custVal;
+      }
+
+      const fileBadge = document.getElementById('uploadedFileBadge');
+      const fileNameLabel = document.getElementById('uploadedFileName');
+      if (fileBadge && fileNameLabel) {
+        fileBadge.classList.remove('hidden');
+        fileNameLabel.textContent = custVal ? `Đã nạp: ${custVal} (${hwidVal.slice(-4)})` : 'Đã nạp thông tin thành công';
+      }
+
+      showToast(`Đã nhận diện: ${custVal || 'Khách hàng'} • ${productName}`, 'info');
     }
 
     function loadSampleRequest() {
-      if (currentProductCode === 'ALL') {
-        populateRequestData({
-          app_name: "AV Civil 3D + AVRoad TDT 9.1",
-          product: "Trọn Gói Cả 2 (AV Civil 3D + AVRoad TDT 9.1)",
-          software: "ALL",
-          software_code: "ALL",
-          customer_name: "Kỹ Sư Trưởng Nguyễn Văn Toàn",
-          company: "Tổng Công ty Tư vấn Thiết kế Giao thông Vận tải (TEDI)",
-          phone: "0909998877",
-          email: "toan.tedi@example.com",
-          machine_name: "WORKSTATION-COMBO",
-          hwid: "AV-8F9E-1A2B-3C4D-5E6F"
-        });
-      } else if (currentProductCode === 'AVROAD_TDT91' || currentProductCode === 'TDT_ROAD') {
+      if (currentProductCode === 'AVROAD_TDT91') {
         populateRequestData({
           app_name: "AVRoad 2026 (TDT 9.1)",
-          product: "AVRoad / TDT 9.1 (Thiết kế đường, San nền, Khảo sát)",
-          software: "TDT_Road",
+          product: "AVRoad 2026 (TDT 9.1)",
           software_code: "AVROAD_TDT91",
           customer_name: "Trần Minh Quang",
-          company: "Công ty Cổ phần Thiết kế Đường TDT",
-          phone: "0987654321",
-          email: "quang.tdt@gmail.com",
-          machine_name: "DESKTOP-TDT91",
           hwid: "AV-4A1B-2C3D-4E5F-6A7B"
+        });
+      } else if (currentProductCode === 'COMBO') {
+        populateRequestData({
+          app_name: "AV_Civil & AVRoad Combo",
+          product: "Combo Cả 2",
+          software_code: "COMBO",
+          customer_name: "Nguyễn Văn Hưng",
+          hwid: "AV-7A8B-9C0D-1E2F-3A4B"
         });
       } else {
         populateRequestData({
           app_name: "AV_Civil",
-          product: "AV Civil 3D (AV Tools - Thoát nước, Đường, 3D)",
-          software: "AV_Civil",
+          product: "AV_Civil",
           software_code: "AV_CIVIL",
           customer_name: "Nguyễn Văn Hưng",
-          company: "Công ty CP Hạ tầng Giao thông AV",
-          phone: "0912345678",
-          email: "hung.civil@example.com",
-          machine_name: "DESKTOP-CIVIL3D",
           hwid: "AV-7A8B-9C0D-1E2F-3A4B"
         });
       }
@@ -1756,46 +1502,24 @@ oQIDAQAB
     function resetLicenseForm() {
       document.getElementById('licHwid').value = '';
       document.getElementById('licCustomer').value = '';
-      document.getElementById('licCompany').value = '';
-      document.getElementById('licMachine').value = '';
-      document.getElementById('licPhone').value = '';
-      document.getElementById('licNotes').value = '';
-      selectAllModules(true);
-      initializeDefaultDates();
-      selectProduct('AV_CIVIL');
-      const card = document.getElementById('licenseResultCard');
-      if (card) {
-        card.querySelector('#resultPlaceholder')?.classList.remove('hidden');
-        card.querySelector('#resultDetails')?.classList.add('hidden');
-      }
+      resetUploadedFile();
+      const pasteArea = document.getElementById('pasteArea');
+      if (pasteArea) pasteArea.classList.add('hidden');
+      const resultCard = document.getElementById('licenseResultCard');
+      if (resultCard) resultCard.classList.add('hidden');
+      comboLicenses = null;
+      activeLicenseObject = null;
       showToast('Đã làm mới form thông tin.', 'info');
     }
 
     function copyHWID() {
       const hwid = document.getElementById('licHwid').value.trim();
-      if (!hwid) return;
+      if (!hwid) {
+        showToast('Chưa có mã HWID để copy!', 'warning');
+        return;
+      }
       navigator.clipboard.writeText(hwid);
       showToast('Đã sao chép HWID vào bộ nhớ tạm!', 'success');
-    }
-
-    // ==================== MODULE SELECTION LOGIC ====================
-    function handleModuleAllToggle(checkbox) {
-      const items = document.querySelectorAll('.mod-item');
-      items.forEach(cb => cb.checked = checkbox.checked);
-    }
-
-    function selectAllModules(checked) {
-      document.getElementById('modAll').checked = checked;
-      document.querySelectorAll('.mod-item').forEach(cb => cb.checked = checked);
-    }
-
-    function getSelectedModules() {
-      const list = [];
-      if (document.getElementById('modAll').checked) list.push('AV_ALL');
-      if (document.getElementById('modRoad').checked) list.push('AV_ROAD');
-      if (document.getElementById('modPipe').checked) list.push('AV_PIPE');
-      if (document.getElementById('modModel').checked) list.push('AV_MODEL');
-      return list.length > 0 ? list : ['AV_ALL'];
     }
 
     // ==================== WEB CRYPTO RSA ENGINE ====================
@@ -1997,7 +1721,75 @@ oQIDAQAB
       downloadBlob(pem, 'public_key.pem', 'application/x-pem-file');
     }
 
-    // ==================== GENERATE & SIGN LICENSE ====================
+    // ==================== GENERATE & SIGN LICENSE (RSA-2048) ====================
+    async function signSingleLicense(prodCode, prodName, custName, hwidVal) {
+      const timestamp = new Date().toISOString().replace(/[-:T]/g, '').slice(0, 14);
+      const randomSuffix = Math.random().toString(36).substring(2, 6).toUpperCase();
+      const licenseId = `LIC-${timestamp}-${randomSuffix}`;
+      const issuedDate = new Date().toISOString();
+
+      const payload = {
+        license_id: licenseId,
+        product: prodName,
+        software_code: prodCode,
+        customer_name: custName,
+        company: "Cá nhân",
+        machine_name: "PC",
+        phone: "",
+        hwid: hwidVal,
+        hardware_id: hwidVal,
+        modules: ["ALL"],
+        license_type: "Permanent",
+        issued_date: issuedDate,
+        valid_from: issuedDate,
+        expiry_date: "9999-12-31",
+        update_expiry_date: "9999-12-31",
+        expiry: "PERPETUAL",
+        is_permanent: true,
+        max_cad_version: "ALL",
+        notes: "Full License Perpetual",
+        status: "active"
+      };
+
+      const payloadString = JSON.stringify(payload);
+      const dataBytes = new TextEncoder().encode(payloadString);
+
+      const signatureBuffer = await crypto.subtle.sign(
+        'RSASSA-PKCS1-v1_5',
+        currentCryptoKey,
+        dataBytes
+      );
+
+      const sigBytes = new Uint8Array(signatureBuffer);
+      let binarySig = '';
+      for (let i = 0; i < sigBytes.byteLength; i++) {
+        binarySig += String.fromCharCode(sigBytes[i]);
+      }
+      const signatureBase64 = btoa(binarySig);
+
+      const safeCustName = custName.replace(/[^a-zA-Z0-9_\u00C0-\u1EF9]/g, '_');
+      const isAvroad = prodCode === 'AVROAD_TDT91';
+      const filePrefix = isAvroad ? "AVRoad_License" : "AVCivil_License";
+      const fileName = `${filePrefix}_${safeCustName}_${hwidVal.substring(hwidVal.length - 4)}.avlic`;
+
+      const signedLicenseFile = {
+        version: "1.0",
+        signature_algorithm: "RSA-SHA256",
+        algorithm: "RSASSA-PKCS1-v1_5-SHA256",
+        payload: payloadString,
+        signature: signatureBase64
+      };
+
+      return {
+        payload,
+        payloadString,
+        signature: signatureBase64,
+        fileName,
+        fileContent: JSON.stringify(signedLicenseFile, null, 2),
+        rawObject: signedLicenseFile
+      };
+    }
+
     async function generateAndSignLicense() {
       if (!currentCryptoKey) {
         showToast('Chưa nạp Khóa Riêng Tư RSA! Vui lòng vào tab Quản Lý Khóa.', 'error');
@@ -2007,146 +1799,185 @@ oQIDAQAB
 
       const hwid = document.getElementById('licHwid').value.trim().toUpperCase();
       const customer = document.getElementById('licCustomer').value.trim();
-      const company = document.getElementById('licCompany').value.trim();
-      const machine = document.getElementById('licMachine').value.trim();
-      const phone = document.getElementById('licPhone').value.trim();
-      const expiryDate = document.getElementById('licExpiryDate').value;
-      const updateExpiryDate = document.getElementById('licUpdateExpiryDate').value;
-      const isPermanent = document.getElementById('licIsPermanent').checked;
-      const cadVersion = document.getElementById('licCadVersion').value;
-      const notes = document.getElementById('licNotes').value.trim();
-      const modules = getSelectedModules();
-
-      if (!hwid) {
-        showToast('Vui lòng nhập hoặc kéo thả file để có Mã thiết bị (HWID)!', 'error');
-        document.getElementById('licHwid').focus();
-        return;
-      }
 
       if (!customer) {
-        showToast('Vui lòng nhập Tên Khách Hàng / Kỹ Sư!', 'error');
+        showToast('Vui lòng nhập Họ và Tên người dùng!', 'error');
         document.getElementById('licCustomer').focus();
         return;
       }
 
-      const timestamp = new Date().toISOString().replace(/[-:T]/g, '').slice(0, 14);
-      const randomSuffix = Math.random().toString(36).substring(2, 6).toUpperCase();
-      const licenseId = `LIC-${timestamp}-${randomSuffix}`;
-      const issuedDate = formatDateISO(new Date());
-
-      let softwareVal = "AV_Civil";
-      let softwareCodeVal = "AV_CIVIL";
-      let productName = "AV Civil 3D (AV Tools - Thoát nước, Đường, 3D)";
-
-      if (currentProductCode === 'TDT_ROAD' || currentProductCode === 'AVROAD_TDT91') {
-        softwareVal = "TDT_Road";
-        softwareCodeVal = "AVROAD_TDT91";
-        productName = "AVRoad / TDT 9.1 (Thiết kế đường, San nền, Khảo sát)";
-      } else if (currentProductCode === 'ALL') {
-        softwareVal = "ALL";
-        softwareCodeVal = "ALL";
-        productName = "Trọn Gói Cả 2 (AV Civil 3D + AVRoad TDT 9.1)";
+      if (!hwid) {
+        showToast('Vui lòng nhập hoặc nạp file .avreq để có Mã máy (HWID)!', 'error');
+        document.getElementById('licHwid').focus();
+        return;
       }
 
-      const payload = {
-        license_id: licenseId,
-        product: productName,
-        software: softwareVal,
-        software_code: softwareCodeVal,
-        customer_name: customer,
-        company: company || 'Cá nhân',
-        machine_name: machine || 'PC',
-        phone: phone || '',
-        hwid: hwid,
-        hardware_id: hwid,
-        modules: modules,
-        license_type: isPermanent ? "Permanent" : "TimeLimited",
-        issued_date: issuedDate,
-        valid_from: issuedDate,
-        expiry_date: isPermanent ? "9999-12-31" : expiryDate,
-        update_expiry_date: updateExpiryDate || expiryDate,
-        is_permanent: isPermanent,
-        max_cad_version: cadVersion,
-        notes: notes,
-        status: "active"
-      };
-
       try {
-        const payloadString = JSON.stringify(payload);
-        const dataBytes = new TextEncoder().encode(payloadString);
+        const resultCard = document.getElementById('licenseResultCard');
+        const resProduct = document.getElementById('resProduct');
+        const resCustomer = document.getElementById('resCustomer');
+        const resHwid = document.getElementById('resHwid');
+        const resBadge = document.getElementById('resBadge');
+        const resStatusSub = document.getElementById('resStatusSub');
+        const inspectorContent = document.getElementById('inspectorContent');
+        const resultActionButtons = document.getElementById('resultActionButtons');
 
-        const signatureBuffer = await crypto.subtle.sign(
-          'RSASSA-PKCS1-v1_5',
-          currentCryptoKey,
-          dataBytes
-        );
+        if (currentProductCode === 'COMBO') {
+          // Sign Civil 3D
+          const civilResult = await signSingleLicense('AV_CIVIL', 'AV_Civil', customer, hwid);
+          // Sign AVRoad
+          const roadResult = await signSingleLicense('AVROAD_TDT91', 'AVRoad 2026 (TDT 9.1)', customer, hwid);
 
-        const sigBytes = new Uint8Array(signatureBuffer);
-        let binarySig = '';
-        for (let i = 0; i < sigBytes.byteLength; i++) {
-          binarySig += String.fromCharCode(sigBytes[i]);
-        }
-        const signatureBase64 = btoa(binarySig);
+          // Save both to Registry
+          saveLicenseToRegistry({
+            version: "1.0",
+            payload: civilResult.payload,
+            signature: civilResult.signature,
+            fileName: civilResult.fileName,
+            fileContent: civilResult.fileContent
+          });
+          saveLicenseToRegistry({
+            version: "1.0",
+            payload: roadResult.payload,
+            signature: roadResult.signature,
+            fileName: roadResult.fileName,
+            fileContent: roadResult.fileContent
+          });
 
-        activeLicenseObject = {
-          version: "1.0",
-          payload: payload,
-          signature: signatureBase64,
-          algorithm: "RSASSA-PKCS1-v1_5-SHA256"
-        };
+          activeLicenseObject = civilResult.rawObject;
+          activeLicenseFileName = civilResult.fileName;
+          comboLicenses = {
+            civil: civilResult,
+            road: roadResult
+          };
 
-        const safeCustName = customer.replace(/[^a-zA-Z0-9_\u00C0-\u1EF9]/g, '_');
-        let filePrefix = "AVCivil_License";
-        if (softwareVal === 'TDT_Road') filePrefix = "AVRoad_License";
-        else if (softwareVal === 'ALL') filePrefix = "AVCombo_License";
+          // Trigger download of both files
+          downloadBlob(civilResult.fileContent, civilResult.fileName, 'application/octet-stream');
+          setTimeout(() => {
+            downloadBlob(roadResult.fileContent, roadResult.fileName, 'application/octet-stream');
+          }, 400);
 
-        activeLicenseFileName = `${filePrefix}_${safeCustName}_${hwid.substring(hwid.length - 4)}.avlic`;
-
-        document.getElementById('resultPlaceholder').classList.add('hidden');
-        document.getElementById('resultDetails').classList.remove('hidden');
-
-        document.getElementById('resStatusSub').textContent = 'Ký số thành công & sẵn sàng xuất file';
-        document.getElementById('resBadge').textContent = 'ĐÃ KÝ SỐ';
-        document.getElementById('resBadge').className = 'text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40';
-
-        const resProd = document.getElementById('resProduct');
-        if (resProd) {
-          resProd.textContent = productName;
-          if (softwareVal === 'ALL') {
-            resProd.className = 'font-semibold text-purple-400';
-          } else if (softwareVal === 'TDT_Road') {
-            resProd.className = 'font-semibold text-blue-400';
-          } else {
-            resProd.className = 'font-semibold text-emerald-400';
+          if (resProduct) {
+            resProduct.textContent = 'Combo: AV_Civil + AVRoad (2 File)';
+            resProduct.className = 'font-bold text-amber-300';
           }
+          if (resCustomer) resCustomer.textContent = customer;
+          if (resHwid) resHwid.textContent = hwid;
+          if (resBadge) {
+            resBadge.textContent = 'COMBO RSA-2048';
+            resBadge.className = 'text-[10px] font-mono px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40';
+          }
+          if (resStatusSub) resStatusSub.textContent = 'Đã tạo & tải 2 file: AV_Civil & AVRoad';
+
+          if (resultActionButtons) {
+            resultActionButtons.innerHTML = `
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <button type="button" onclick="downloadComboCivil()" 
+                  class="w-full py-3 px-3 bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white font-bold rounded-xl shadow transition flex items-center justify-center gap-2 text-xs sm:text-sm cursor-pointer">
+                  <i data-lucide="download" class="w-4 h-4"></i>
+                  <span>Tải AV_Civil (.avlic)</span>
+                </button>
+                <button type="button" onclick="downloadComboRoad()" 
+                  class="w-full py-3 px-3 bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white font-bold rounded-xl shadow transition flex items-center justify-center gap-2 text-xs sm:text-sm cursor-pointer">
+                  <i data-lucide="download" class="w-4 h-4"></i>
+                  <span>Tải AVRoad (.avlic)</span>
+                </button>
+              </div>
+            `;
+          }
+
+          if (inspectorContent) {
+            inspectorContent.textContent = JSON.stringify({
+              combo: true,
+              civilLicense: civilResult.rawObject,
+              roadLicense: roadResult.rawObject
+            }, null, 2);
+          }
+
+          showToast('Đã ký số & tải thành công cả 2 file bản quyền (Combo)!', 'success');
+
+        } else {
+          // Single product
+          const isAvroad = currentProductCode === 'AVROAD_TDT91';
+          const prodCode = isAvroad ? 'AVROAD_TDT91' : 'AV_CIVIL';
+          const prodName = isAvroad ? 'AVRoad 2026 (TDT 9.1)' : 'AV_Civil';
+
+          const result = await signSingleLicense(prodCode, prodName, customer, hwid);
+
+          saveLicenseToRegistry({
+            version: "1.0",
+            payload: result.payload,
+            signature: result.signature,
+            fileName: result.fileName,
+            fileContent: result.fileContent
+          });
+
+          activeLicenseObject = result.rawObject;
+          activeLicenseFileName = result.fileName;
+          comboLicenses = null;
+
+          // Download file immediately
+          downloadBlob(result.fileContent, result.fileName, 'application/octet-stream');
+
+          if (resProduct) {
+            resProduct.textContent = prodName;
+            resProduct.className = isAvroad ? 'font-bold text-blue-400' : 'font-bold text-emerald-400';
+          }
+          if (resCustomer) resCustomer.textContent = customer;
+          if (resHwid) resHwid.textContent = hwid;
+          if (resBadge) {
+            resBadge.textContent = 'RSA-2048 OK';
+            resBadge.className = 'text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40';
+          }
+          if (resStatusSub) resStatusSub.textContent = `Đã tạo & tải file: ${result.fileName}`;
+
+          if (resultActionButtons) {
+            resultActionButtons.innerHTML = `
+              <button type="button" onclick="downloadLicenseFile()" 
+                class="w-full py-3.5 px-4 bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white font-bold rounded-xl shadow-lg shadow-emerald-600/25 transition flex items-center justify-center gap-2 text-sm cursor-pointer">
+                <i data-lucide="download" class="w-4 h-4"></i>
+                <span>Tải Lại File ${result.fileName}</span>
+              </button>
+            `;
+          }
+
+          if (inspectorContent) {
+            inspectorContent.textContent = result.fileContent;
+          }
+
+          showToast(`Đã ký số & tải file ${result.fileName}!`, 'success');
         }
 
-        document.getElementById('resLicId').textContent = licenseId;
-        document.getElementById('resCustomer').textContent = customer;
-        document.getElementById('resHwid').textContent = hwid;
-        document.getElementById('resModules').textContent = modules.join(', ');
-        document.getElementById('resIssueDate').textContent = issuedDate;
-        document.getElementById('resExpiryDate').textContent = isPermanent ? 'Vĩnh Viễn (9999-12-31)' : expiryDate;
-        document.getElementById('resUpdateExpiryDate').textContent = updateExpiryDate || expiryDate;
-
-        document.getElementById('inspectorContent').textContent = JSON.stringify(activeLicenseObject, null, 2);
-
-        saveLicenseToRegistry(activeLicenseObject);
-
-        showToast('Đã ký số & tạo Giấy phép AV_License.avlic thành công!', 'success');
-
-        if (window.innerWidth < 1024) {
-          document.getElementById('licenseResultCard').scrollIntoView({ behavior: 'smooth' });
+        if (resultCard) {
+          resultCard.classList.remove('hidden');
+          resultCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
+
+        lucide.createIcons();
+
       } catch (err) {
         console.error('Signing error:', err);
         showToast('Lỗi trong quá trình ký số: ' + err.message, 'error');
       }
     }
 
+    function downloadComboCivil() {
+      if (comboLicenses && comboLicenses.civil) {
+        downloadBlob(comboLicenses.civil.fileContent, comboLicenses.civil.fileName, 'application/octet-stream');
+        showToast(`Đã tải: ${comboLicenses.civil.fileName}`, 'success');
+      }
+    }
+
+    function downloadComboRoad() {
+      if (comboLicenses && comboLicenses.road) {
+        downloadBlob(comboLicenses.road.fileContent, comboLicenses.road.fileName, 'application/octet-stream');
+        showToast(`Đã tải: ${comboLicenses.road.fileName}`, 'success');
+      }
+    }
+
     function toggleInspector() {
       const area = document.getElementById('inspectorArea');
-      area.classList.toggle('hidden');
+      if (area) area.classList.toggle('hidden');
     }
 
     // ==================== DOWNLOAD & EXPORT ====================
@@ -2155,23 +1986,26 @@ oQIDAQAB
         showToast('Chưa có giấy phép được tạo!', 'error');
         return;
       }
-      const jsonStr = JSON.stringify(activeLicenseObject, null, 2);
-      downloadBlob(jsonStr, activeLicenseFileName, 'application/octet-stream');
-      showToast(`Đã tải xuống file: ${activeLicenseFileName}`, 'success');
+      const content = typeof activeLicenseObject === 'string' ? activeLicenseObject : JSON.stringify(activeLicenseObject, null, 2);
+      downloadBlob(content, activeLicenseFileName, 'application/octet-stream');
+      showToast(`Đã tải xuống: ${activeLicenseFileName}`, 'success');
     }
 
     async function shareLicenseFile() {
-      if (!activeLicenseObject) return;
-      const jsonStr = JSON.stringify(activeLicenseObject, null, 2);
+      if (!activeLicenseObject) {
+        showToast('Chưa có giấy phép để chia sẻ!', 'warning');
+        return;
+      }
+      const content = typeof activeLicenseObject === 'string' ? activeLicenseObject : JSON.stringify(activeLicenseObject, null, 2);
 
       if (navigator.share) {
         try {
-          const file = new File([jsonStr], activeLicenseFileName, { type: 'application/octet-stream' });
+          const file = new File([content], activeLicenseFileName, { type: 'application/octet-stream' });
           if (navigator.canShare && navigator.canShare({ files: [file] })) {
             await navigator.share({
               files: [file],
               title: 'AV License File',
-              text: `Giấy phép bản quyền AV Civil 3D cho ${activeLicenseObject.payload.customer_name}`
+              text: `Giấy phép bản quyền: ${activeLicenseFileName}`
             });
             showToast('Chia sẻ thành công!', 'success');
             return;
@@ -2182,14 +2016,17 @@ oQIDAQAB
       }
 
       copyLicenseBase64();
-      showToast('Đã copy nội dung License để gửi qua Zalo/Telegram.', 'info');
+      showToast('Đã sao chép nội dung License để gửi qua Zalo/Telegram.', 'info');
     }
 
     function copyLicenseBase64() {
-      if (!activeLicenseObject) return;
-      const jsonStr = JSON.stringify(activeLicenseObject);
-      navigator.clipboard.writeText(jsonStr);
-      showToast('Đã sao chép chuỗi License JSON vào Clipboard!', 'success');
+      if (!activeLicenseObject) {
+        showToast('Chưa có giấy phép để sao chép!', 'warning');
+        return;
+      }
+      const content = typeof activeLicenseObject === 'string' ? activeLicenseObject : JSON.stringify(activeLicenseObject, null, 2);
+      navigator.clipboard.writeText(content);
+      showToast('Đã sao chép nội dung License vào Clipboard!', 'success');
     }
 
     function downloadBlob(content, filename, contentType) {
@@ -2237,32 +2074,22 @@ oQIDAQAB
       const today = new Date();
 
       let countAll = list.length;
-      let countAvcivil = 0;
       let countAvroad = 0;
-      let countCombo = 0;
+      let countAvcivil = 0;
 
       list.forEach(item => {
         const p = item.payload || {};
-        const sw = (p.software || '').toUpperCase();
-        const code = (p.software_code || '').toUpperCase();
-        const prod = (p.product || '').toLowerCase();
-
-        const isCombo = sw === 'ALL' || code === 'ALL' || prod.includes('cả 2') || prod.includes('combo');
-        const isTdt = !isCombo && (sw === 'TDT_ROAD' || code === 'AVROAD_TDT91' || code === 'TDT_ROAD' || prod.includes('avroad') || prod.includes('tdt'));
-        
-        if (isCombo) countCombo++;
-        else if (isTdt) countAvroad++;
+        const isAvroad = p.software_code === 'AVROAD_TDT91' || (p.product && (p.product.includes('AVRoad') || p.product.includes('TDT')));
+        if (isAvroad) countAvroad++;
         else countAvcivil++;
       });
 
       const bAll = document.getElementById('badgeCountAll');
       const bAvroad = document.getElementById('badgeCountAvroad');
       const bAvcivil = document.getElementById('badgeCountAvcivil');
-      const bCombo = document.getElementById('badgeCountCombo');
       if (bAll) bAll.textContent = countAll;
-      if (bAvcivil) bAvcivil.textContent = countAvcivil;
       if (bAvroad) bAvroad.textContent = countAvroad;
-      if (bCombo) bCombo.textContent = countCombo;
+      if (bAvcivil) bAvcivil.textContent = countAvcivil;
 
       const filtered = list.filter(item => {
         const p = item.payload;
@@ -2279,17 +2106,11 @@ oQIDAQAB
           if (isExpiring) countExpiring++;
         }
 
-        const sw = (p.software || '').toUpperCase();
-        const code = (p.software_code || '').toUpperCase();
-        const prod = (p.product || '').toLowerCase();
-
-        const isCombo = sw === 'ALL' || code === 'ALL' || prod.includes('cả 2') || prod.includes('combo');
-        const isTdt = !isCombo && (sw === 'TDT_ROAD' || code === 'AVROAD_TDT91' || code === 'TDT_ROAD' || prod.includes('avroad') || prod.includes('tdt'));
-        const isCivil = !isCombo && !isTdt;
-
-        if (registryProductFilter === 'AV_CIVIL' && !isCivil) return false;
-        if (registryProductFilter === 'AVROAD_TDT91' && !isTdt) return false;
-        if (registryProductFilter === 'ALL_COMBO' && !isCombo) return false;
+        if (registryProductFilter !== 'ALL') {
+          const isAvroad = p.software_code === 'AVROAD_TDT91' || (p.product && (p.product.includes('AVRoad') || p.product.includes('TDT')));
+          if (registryProductFilter === 'AVROAD_TDT91' && !isAvroad) return false;
+          if (registryProductFilter === 'AV_CIVIL' && isAvroad) return false;
+        }
 
         if (search) {
           const matchStr = `${p.customer_name} ${p.hwid} ${p.company} ${p.phone} ${p.license_id}`.toLowerCase();
@@ -2339,20 +2160,10 @@ oQIDAQAB
           statusBadge = `<span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">CÒN ${daysLeft} NGÀY</span>`;
         }
 
-        const sw = (p.software || '').toUpperCase();
-        const code = (p.software_code || '').toUpperCase();
-        const prod = (p.product || '').toLowerCase();
-        const isCombo = sw === 'ALL' || code === 'ALL' || prod.includes('cả 2') || prod.includes('combo');
-        const isTdt = !isCombo && (sw === 'TDT_ROAD' || code === 'AVROAD_TDT91' || code === 'TDT_ROAD' || prod.includes('avroad') || prod.includes('tdt'));
-
-        let prodBadge = '';
-        if (isCombo) {
-          prodBadge = '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30 flex items-center gap-1 shadow-sm"><span>⚡</span> Trọn Gói Cả 2</span>';
-        } else if (isTdt) {
-          prodBadge = '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-500/20 text-blue-300 border border-blue-500/30 flex items-center gap-1"><span>🛣️</span> AVRoad / TDT 9.1</span>';
-        } else {
-          prodBadge = '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-1"><span>🏗️</span> AV Civil 3D</span>';
-        }
+        const isAvroad = p.software_code === 'AVROAD_TDT91' || (p.product && (p.product.includes('AVRoad') || p.product.includes('TDT')));
+        const prodBadge = isAvroad
+          ? '<span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-blue-500/20 text-blue-300 border border-blue-500/30">AVRoad 2026 (TDT 9.1)</span>'
+          : '<span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">AV_Civil</span>';
 
         return `
           <div class="bg-slate-900 border border-slate-800 hover:border-slate-700 rounded-2xl p-4 sm:p-5 transition shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -2384,26 +2195,31 @@ oQIDAQAB
             <!-- Action buttons per row -->
             <div class="flex items-center gap-2 self-end md:self-center">
               <button onclick="downloadFromRegistry('${p.license_id}')" title="Tải lại file .avlic" 
-                class="p-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white rounded-xl transition border border-slate-700 cursor-pointer">
+                class="p-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white rounded-xl transition border border-slate-700">
                 <i data-lucide="download" class="w-4 h-4 text-emerald-400"></i>
               </button>
 
               <button onclick="quickRenewLicense('${p.license_id}')" title="Gia hạn thêm 1 năm" 
-                class="p-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white rounded-xl transition border border-slate-700 cursor-pointer">
+                class="p-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white rounded-xl transition border border-slate-700">
                 <i data-lucide="calendar-plus" class="w-4 h-4 text-indigo-400"></i>
               </button>
 
               ${!isRevoked ? `
                 <button onclick="revokeLicense('${p.license_id}')" title="Thu hồi giấy phép & Khóa máy" 
-                  class="p-2.5 bg-slate-800 hover:bg-rose-950/40 text-slate-400 hover:text-rose-300 rounded-xl transition border border-slate-700 hover:border-rose-800 cursor-pointer">
+                  class="p-2.5 bg-slate-800 hover:bg-rose-950/40 text-slate-400 hover:text-rose-300 rounded-xl transition border border-slate-700 hover:border-rose-800">
                   <i data-lucide="ban" class="w-4 h-4 text-rose-400"></i>
                 </button>
               ` : `
                 <button onclick="unrevokeLicense('${p.license_id}')" title="Khôi phục kích hoạt" 
-                  class="p-2.5 bg-slate-800 hover:bg-emerald-950/40 text-slate-400 hover:text-emerald-300 rounded-xl transition border border-slate-700 hover:border-emerald-800 cursor-pointer">
+                  class="p-2.5 bg-slate-800 hover:bg-emerald-950/40 text-slate-400 hover:text-emerald-300 rounded-xl transition border border-slate-700 hover:border-emerald-800">
                   <i data-lucide="check" class="w-4 h-4 text-emerald-400"></i>
                 </button>
               `}
+
+              <button onclick="deleteRegistryRecord('${p.license_id}')" title="Xóa khỏi lịch sử" 
+                class="p-2.5 bg-slate-800 hover:bg-slate-700 text-slate-500 hover:text-rose-400 rounded-xl transition border border-slate-700">
+                <i data-lucide="trash-2" class="w-4 h-4"></i>
+              </button>
             </div>
 
           </div>
@@ -2419,17 +2235,9 @@ oQIDAQAB
       if (!item) return;
 
       const p = item.payload;
-      const sw = (p.software || '').toUpperCase();
-      const code = (p.software_code || '').toUpperCase();
-      const prod = (p.product || '').toLowerCase();
-      const isCombo = sw === 'ALL' || code === 'ALL' || prod.includes('cả 2') || prod.includes('combo');
-      const isTdt = !isCombo && (sw === 'TDT_ROAD' || code === 'AVROAD_TDT91' || code === 'TDT_ROAD' || prod.includes('avroad') || prod.includes('tdt'));
-
-      let filePrefix = "AVCivil_License";
-      if (isCombo) filePrefix = "AVCombo_License";
-      else if (isTdt) filePrefix = "AVRoad_License";
-
-      const safeCustName = p.customer_name.replace(/[^a-zA-Z0-9_À-ỹ]/g, '_');
+      const isAvroad = p.software_code === 'AVROAD_TDT91' || (p.product && (p.product.includes('AVRoad') || p.product.includes('TDT')));
+      const filePrefix = isAvroad ? "AVRoad_License" : "AVCivil_License";
+      const safeCustName = p.customer_name.replace(/[^a-zA-Z0-9_\u00C0-\u1EF9]/g, '_');
       const filename = `${filePrefix}_${safeCustName}_${p.hwid.substring(p.hwid.length - 4)}.avlic`;
       downloadBlob(JSON.stringify(item, null, 2), filename, 'application/octet-stream');
       showToast(`Đã tải xuống: ${filename}`, 'success');
@@ -2805,61 +2613,12 @@ catch (HttpRequestException)
     }
 
     // ==================== RELEASES & UPDATES MANAGEMENT ====================
-    let cachedReleases = {
-      'AV_CIVIL': null,
-      'AVROAD_TDT91': null
-    };
-
-    function selectUpdateProduct(prodCode) {
-      currentUpdateProduct = prodCode;
-      const subtabCivil = document.getElementById('subtabUpdateAvcivil');
-      const subtabRoad = document.getElementById('subtabUpdateAvroad');
-      const badge = document.getElementById('activeUpdateRepoBadge');
-      const headerTitle = document.getElementById('updateFormHeaderTitle');
-      const targetLabel = document.getElementById('updateTargetRepoLabel');
-      const noteEl = document.getElementById('currentDownloadUrlNote');
-      const alertRepo = document.getElementById('alertRepoDest');
-      const cardTitle = document.getElementById('currentVersionCardTitle');
-      const publishBtnText = document.getElementById('btnPublishReleaseText');
-
-      const baseInactive = 'update-subtab flex items-center gap-3 py-3 px-4 rounded-xl border border-slate-800 bg-slate-950/60 hover:bg-slate-800 text-slate-400 font-semibold text-xs sm:text-sm transition-all duration-200 cursor-pointer text-left';
-
-      if (prodCode === 'AVROAD_TDT91') {
-        if (subtabCivil) subtabCivil.className = baseInactive;
-        if (subtabRoad) subtabRoad.className = 'update-subtab active flex items-center gap-3 py-3 px-4 rounded-xl border border-blue-500 bg-blue-500/10 text-blue-300 font-semibold text-xs sm:text-sm transition-all duration-200 cursor-pointer text-left shadow-sm';
-        if (badge) {
-          badge.textContent = 'repo: tienhoaa/AVRoad';
-          badge.className = 'text-xs px-2.5 py-0.5 rounded-full font-mono font-bold bg-blue-500/20 text-blue-300 border border-blue-500/30';
-        }
-        if (headerTitle) headerTitle.textContent = 'Phát Hành Bản Cập Nhật Cho AVRoad / TDT 9.1';
-        if (targetLabel) targetLabel.textContent = 'tienhoaa/AVRoad';
-        if (alertRepo) alertRepo.textContent = 'tienhoaa/AVRoad';
-        if (cardTitle) cardTitle.textContent = 'Phiên Bản Online (AVRoad / TDT 9.1)';
-        if (publishBtnText) publishBtnText.textContent = 'PHÁT HÀNH BẢN CẬP NHẬT CHO AVROAD / TDT 9.1';
-        if (noteEl) noteEl.innerHTML = '<i data-lucide="info" class="w-3 h-3 text-blue-400"></i> Trình cập nhật AVRoad.exe / AVUpdater.exe sẽ kiểm tra file version.json và tải bản vá từ link này.';
-      } else {
-        if (subtabRoad) subtabRoad.className = baseInactive;
-        if (subtabCivil) subtabCivil.className = 'update-subtab active flex items-center gap-3 py-3 px-4 rounded-xl border border-emerald-500 bg-emerald-500/10 text-emerald-300 font-semibold text-xs sm:text-sm transition-all duration-200 cursor-pointer text-left shadow-sm';
-        if (badge) {
-          badge.textContent = 'repo: tienhoaa/AV_Releases';
-          badge.className = 'text-xs px-2.5 py-0.5 rounded-full font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30';
-        }
-        if (headerTitle) headerTitle.textContent = 'Phát Hành Bản Cập Nhật Cho AV Civil 3D';
-        if (targetLabel) targetLabel.textContent = 'tienhoaa/AV_Releases';
-        if (alertRepo) alertRepo.textContent = 'tienhoaa/AV_Releases';
-        if (cardTitle) cardTitle.textContent = 'Phiên Bản Online (AV Civil 3D)';
-        if (publishBtnText) publishBtnText.textContent = 'PHÁT HÀNH BẢN CẬP NHẬT CHO AV CIVIL 3D';
-        if (noteEl) noteEl.innerHTML = '<i data-lucide="info" class="w-3 h-3 text-emerald-400"></i> Plugin Civil 3D sẽ tải file zip từ link này khi người dùng xác nhận cập nhật tự động.';
-      }
-
-      fetchCurrentReleaseInfo();
-      lucide.createIcons();
-    }
+    let cachedCurrentRelease = null;
 
     async function fetchCurrentReleaseInfo(isManual = false) {
-      const isRoad = currentUpdateProduct === 'AVROAD_TDT91';
-      const repo = isRoad ? "tienhoaa/AVRoad" : "tienhoaa/AV_Releases";
-      const branch = "main";
+      const cfg = getStoredGitHubConfig();
+      const repo = cfg.repo || "tienhoaa/AV_Releases";
+      const branch = cfg.branch || "main";
       const manifestUrl = `https://raw.githubusercontent.com/${repo}/${branch}/version.json?t=${Date.now()}`;
       
       const verEl = document.getElementById('currentVersionDisplay');
@@ -2869,7 +2628,7 @@ catch (HttpRequestException)
       const urlLinkEl = document.getElementById('currentDownloadLink');
       const changelogEl = document.getElementById('currentChangelogDisplay');
 
-      if (isManual) showToast(`Đang kiểm tra phiên bản trên GitHub (${repo})...`, 'info');
+      if (isManual) showToast('Đang kiểm tra phiên bản trên GitHub...', 'info');
 
       try {
         const res = await fetch(manifestUrl, { cache: 'no-store' });
@@ -2877,24 +2636,17 @@ catch (HttpRequestException)
           throw new Error(`HTTP ${res.status}: Không tìm thấy file version.json`);
         }
         const data = await res.json();
-        cachedReleases[currentUpdateProduct] = data;
+        cachedCurrentRelease = data;
 
-        const rawVer = data.version ? String(data.version) : (isRoad ? '2.2.2.0' : '1.0.1');
+        const rawVer = data.version ? String(data.version) : '1.0.1';
         const verStr = rawVer.startsWith('v') ? rawVer : 'v' + rawVer;
         const cleanVer = rawVer.replace(/^v/i, '');
-        
-        let downloadUrl = data.download_url || data.patch_download_url || data.url;
-        if (!downloadUrl) {
-          downloadUrl = isRoad
-            ? `https://raw.githubusercontent.com/tienhoaa/AVRoad/main/patch_${cleanVer}.zip`
-            : `https://github.com/tienhoaa/AV_Releases/releases/download/${verStr}/AVTools_latest.zip`;
-        }
-
+        const downloadUrl = data.download_url || data.url || `https://github.com/${repo}/releases/download/${verStr}/AVTools_latest.zip`;
         const relDate = data.release_date || new Date().toISOString().split('T')[0];
         const log = data.changelog || data.notes || '(Không có nội dung nhật ký)';
 
         if (verEl) verEl.textContent = verStr;
-        if (!isRoad && badgeEl) badgeEl.textContent = verStr;
+        if (badgeEl) badgeEl.textContent = verStr;
         if (dateEl) dateEl.textContent = relDate;
         if (urlTextEl) urlTextEl.textContent = downloadUrl;
         if (urlLinkEl) urlLinkEl.href = downloadUrl;
@@ -2905,7 +2657,7 @@ catch (HttpRequestException)
         if (newVerInput && (!newVerInput.value || !isManual)) {
           const parts = cleanVer.split('.').map(x => parseInt(x, 10) || 0);
           while (parts.length < 3) parts.push(0);
-          parts[parts.length - 1] += 1; // Bump last segment
+          parts[2] += 1; // Bump patch
           const nextVer = parts.join('.');
           newVerInput.value = nextVer;
           updateDefaultDownloadUrl(nextVer);
@@ -2917,12 +2669,12 @@ catch (HttpRequestException)
         }
 
         if (isManual) {
-          showToast(`Đã tải phiên bản trực tuyến (${isRoad ? 'AVRoad' : 'AV Civil 3D'}): ${verStr}`, 'success');
+          showToast(`Đã tải thông tin phiên bản trực tuyến: ${verStr}`, 'success');
         }
       } catch (err) {
         console.warn('Lỗi tải version.json:', err);
-        const fallbackVer = isRoad ? 'v2.2.2.0' : 'v1.0.1';
-        if (verEl) verEl.textContent = fallbackVer;
+        if (verEl) verEl.textContent = 'v1.0.1';
+        if (badgeEl) badgeEl.textContent = 'v1.0.1';
         if (changelogEl) changelogEl.textContent = 'Không thể tải từ GitHub: ' + err.message;
         if (isManual) {
           showToast('Lỗi khi tải version.json từ GitHub: ' + err.message, 'error');
@@ -2932,15 +2684,12 @@ catch (HttpRequestException)
     }
 
     function updateDefaultDownloadUrl(ver) {
-      const isRoad = currentUpdateProduct === 'AVROAD_TDT91';
-      const cleanVer = ver ? String(ver).trim().replace(/^v/i, '') : (isRoad ? '2.2.3.0' : '1.0.2');
+      const cfg = getStoredGitHubConfig();
+      const repo = cfg.repo || "tienhoaa/AV_Releases";
+      const cleanVer = ver ? String(ver).trim().replace(/^v/i, '') : '1.0.0';
       const urlInput = document.getElementById('updateDownloadUrl');
       if (urlInput) {
-        if (isRoad) {
-          urlInput.value = `https://raw.githubusercontent.com/tienhoaa/AVRoad/main/patch_${cleanVer}.zip`;
-        } else {
-          urlInput.value = `https://github.com/tienhoaa/AV_Releases/releases/download/v${cleanVer}/AVTools_latest.zip`;
-        }
+        urlInput.value = `https://github.com/${repo}/releases/download/v${cleanVer}/AVTools_latest.zip`;
       }
     }
 
@@ -2952,22 +2701,16 @@ catch (HttpRequestException)
     }
 
     function resetDefaultDownloadUrl() {
-      const isRoad = currentUpdateProduct === 'AVROAD_TDT91';
-      const ver = document.getElementById('updateNewVersion')?.value.trim() || (isRoad ? '2.2.3.0' : '1.0.2');
+      const ver = document.getElementById('updateNewVersion')?.value.trim() || '1.0.2';
       updateDefaultDownloadUrl(ver);
       showToast('Đã khôi phục đường dẫn tải mặc định!', 'info');
     }
 
     function autoBumpVersion(type) {
-      const isRoad = currentUpdateProduct === 'AVROAD_TDT91';
       const input = document.getElementById('updateNewVersion');
       let base = input?.value.trim() || '';
-      const cached = cachedReleases[currentUpdateProduct];
-      if (!base && cached?.version) {
-        base = String(cached.version);
-      }
-      if (!base) {
-        base = isRoad ? '2.2.2.0' : '1.0.1';
+      if (!base && cachedCurrentRelease?.version) {
+        base = String(cachedCurrentRelease.version);
       }
       base = base.replace(/^v/i, '');
       const parts = base.split('.').map(x => parseInt(x, 10) || 0);
@@ -2975,18 +2718,19 @@ catch (HttpRequestException)
 
       if (type === 'major') {
         parts[0] += 1;
-        for (let i = 1; i < parts.length; i++) parts[i] = 0;
+        parts[1] = 0;
+        parts[2] = 0;
       } else if (type === 'minor') {
         parts[1] += 1;
-        for (let i = 2; i < parts.length; i++) parts[i] = 0;
+        parts[2] = 0;
       } else {
-        parts[parts.length - 1] += 1;
+        parts[2] += 1;
       }
 
       const newVer = parts.join('.');
       if (input) input.value = newVer;
       updateDefaultDownloadUrl(newVer);
-      showToast(`Đã tăng phiên bản (${isRoad ? 'AVRoad' : 'AV Civil 3D'}): v${newVer}`, 'info');
+      showToast(`Đã tăng phiên bản lên: v${newVer}`, 'info');
     }
 
     function insertChangelogTag(tag) {
@@ -3010,11 +2754,6 @@ catch (HttpRequestException)
     }
 
     async function publishNewRelease() {
-      const isRoad = currentUpdateProduct === 'AVROAD_TDT91';
-      const targetRepo = isRoad ? "tienhoaa/AVRoad" : "tienhoaa/AV_Releases";
-      const targetSoftwareName = isRoad ? "AVRoad / TDT 9.1" : "AV Civil 3D";
-      const branch = "main";
-
       const verInput = document.getElementById('updateNewVersion');
       const dateInput = document.getElementById('updateReleaseDate');
       const urlInput = document.getElementById('updateDownloadUrl');
@@ -3036,7 +2775,7 @@ catch (HttpRequestException)
 
       const cleanVer = rawVer.replace(/^v/i, '');
       if (!/^\d+(\.\d+)+$/.test(cleanVer)) {
-        showToast('Số phiên bản phải có định dạng số (ví dụ: 1.0.2 hoặc 2.2.3)!', 'error');
+        showToast('Số phiên bản phải có định dạng số (ví dụ: 1.0.2 hoặc 2.0.0)!', 'error');
         verInput?.focus();
         return;
       }
@@ -3055,6 +2794,8 @@ catch (HttpRequestException)
 
       const cfg = getStoredGitHubConfig();
       let token = document.getElementById('ghToken')?.value.trim() || cfg.token;
+      const repo = document.getElementById('ghRepo')?.value.trim() || cfg.repo || "tienhoaa/AV_Releases";
+      const branch = document.getElementById('ghBranch')?.value.trim() || cfg.branch || "main";
 
       if (!token) {
         const inputToken = prompt("Chưa tìm thấy GitHub Personal Access Token trong trình duyệt!\n\nVui lòng dán mã GitHub Token (ghp_...):");
@@ -3063,7 +2804,7 @@ catch (HttpRequestException)
           cfg.token = token;
           localStorage.setItem(STORAGE_KEY_GITHUB, JSON.stringify(cfg));
           if (document.getElementById('ghToken')) document.getElementById('ghToken').value = token;
-          updateGitHubBadge(true, targetRepo);
+          updateGitHubBadge(true, repo);
           showToast('Đã lưu GitHub Token vào trình duyệt!', 'success');
         } else {
           showToast('Cần có GitHub Token để phát hành cập nhật!', 'error');
@@ -3072,41 +2813,26 @@ catch (HttpRequestException)
         }
       }
 
-      const confirmMsg = `BẠN CÓ CHẮC CHẮN MUỐN PHÁT HÀNH BẢN CẬP NHẬT CHO ${targetSoftwareName.toUpperCase()}?\n\n` +
-        `• Phần mềm: ${targetSoftwareName}\n` +
-        `• Phiên bản mới: v${cleanVer}\n` +
+      const confirmMsg = `BẠN CÓ CHẮC CHẮN MUỐN PHÁT HÀNH BẢN CẬP NHẬT NÀY?\n\n` +
+        `• Phiên bản: v${cleanVer}\n` +
         `• Ngày phát hành: ${date}\n` +
-        `• Repo đích: ${targetRepo} (nhánh ${branch})\n\n` +
-        `⚠️ CẢNH BÁO: Toàn bộ kỹ sư đang sử dụng ${targetSoftwareName} khi khởi động phần mềm sẽ lập tức nhận được thông báo cập nhật v${cleanVer}!`;
+        `• Repo đích: ${repo} (nhánh ${branch})\n\n` +
+        `⚠️ CẢNH BÁO: Toàn bộ kỹ sư Civil 3D khi khởi động phần mềm sẽ lập tức nhận được thông báo cập nhật v${cleanVer}!`;
 
       if (!confirm(confirmMsg)) {
         return;
       }
 
-      let newManifest;
-      if (isRoad) {
-        newManifest = {
-          version: cleanVer,
-          release_date: date,
-          title: `AVRoad ${cleanVer} - Bản cập nhật OTA`,
-          release_channel: "rc",
-          prerelease: false,
-          changelog: changelog,
-          download_url: url.includes('/releases') ? url : "https://github.com/tienhoaa/AVRoad/releases/latest",
-          patch_download_url: url,
-          patch_sha256: sha256 || ""
-        };
-      } else {
-        newManifest = {
-          version: cleanVer,
-          release_date: date,
-          download_url: url,
-          url: url,
-          changelog: changelog,
-          notes: changelog,
-          sha256: sha256 || ""
-        };
-      }
+      // Payload matching UpdateManifest in Civil 3D
+      const newManifest = {
+        version: cleanVer,
+        release_date: date,
+        download_url: url,
+        url: url,
+        changelog: changelog,
+        notes: changelog,
+        sha256: sha256 || (cachedCurrentRelease?.sha256 || "")
+      };
 
       const jsonStr = JSON.stringify(newManifest, null, 2);
       const base64Content = utf8ToBase64(jsonStr);
@@ -3114,16 +2840,16 @@ catch (HttpRequestException)
       const originalBtnHtml = btn ? btn.innerHTML : '';
       if (btn) {
         btn.disabled = true;
-        btn.innerHTML = `<i data-lucide="loader-2" class="w-5 h-5 animate-spin"></i><span>Đang cập nhật version.json lên ${targetRepo}...</span>`;
+        btn.innerHTML = `<i data-lucide="loader-2" class="w-5 h-5 animate-spin"></i><span>Đang cập nhật version.json lên GitHub...</span>`;
         lucide.createIcons();
       }
 
       try {
-        showToast(`Đang kết nối GitHub REST API (${targetRepo})...`, 'info');
+        showToast('Đang kết nối GitHub REST API...', 'info');
 
         // Step 1: Get current SHA of version.json
         let currentSha = null;
-        const getRes = await fetch(`https://api.github.com/repos/${targetRepo}/contents/version.json?ref=${branch}`, {
+        const getRes = await fetch(`https://api.github.com/repos/${repo}/contents/version.json?ref=${branch}`, {
           headers: {
             'Accept': 'application/vnd.github+json',
             'Authorization': `Bearer ${token}`
@@ -3137,7 +2863,7 @@ catch (HttpRequestException)
 
         // Step 2: PUT updated version.json
         const commitBody = {
-          message: `Release ${targetSoftwareName} v${cleanVer} [via AV Admin Portal]`,
+          message: `Release v${cleanVer} [via AV Admin Portal]`,
           content: base64Content,
           branch: branch
         };
@@ -3145,7 +2871,7 @@ catch (HttpRequestException)
           commitBody.sha = currentSha;
         }
 
-        const putRes = await fetch(`https://api.github.com/repos/${targetRepo}/contents/version.json`, {
+        const putRes = await fetch(`https://api.github.com/repos/${repo}/contents/version.json`, {
           method: 'PUT',
           headers: {
             'Accept': 'application/vnd.github+json',
@@ -3156,7 +2882,8 @@ catch (HttpRequestException)
         });
 
         if (putRes.ok) {
-          showToast(`🎉 PHÁT HÀNH THÀNH CÔNG CHO ${targetSoftwareName.toUpperCase()} v${cleanVer}! Toàn bộ người dùng sẽ nhận được thông báo mới.`, 'success');
+          showToast(`🎉 PHÁT HÀNH THÀNH CÔNG PHIÊN BẢN v${cleanVer}! Toàn bộ người dùng Civil 3D sẽ nhận được thông báo mới.`, 'success');
+          // Refresh current info display
           await fetchCurrentReleaseInfo();
         } else {
           const errData = await putRes.json();
