@@ -15,7 +15,7 @@ Kênh phân phối và cập nhật trực tuyến cho bộ công cụ kỹ thu�
 
 ---
 
-### 🔑 Quản Lý & Kích Hoạt Bản Quyền (Admin Portal)
-* **Trang Quản Lý Bản Quyền:** [tienhoaa.github.io/AV_Releases](https://tienhoaa.github.io/AV_Releases/)
-* Ký số mật mã bất đối xứng **RSA-2048** (Offline 100%).
-* Hỗ trợ kích hoạt trọn gói: **AV Civil 3D**, **AVRoad (TDT 9.1)** và **Combo Cả 2**.
+### 📋 Hướng Dẫn Cài Đặt Nhanh:
+1. Tải file `AV_Tools_Civil3D_Setup.exe` từ link Google Drive ở trên.
+2. Mở file và bấm **Cài đặt**.
+3. Mở AutoCAD / Civil 3D để trải nghiệm bộ công cụ **AV Tools**.
