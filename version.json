@@ -1,9 +1,17 @@
 {
-    "version":  "1.0.6",
-    "release_date":  "2026-11-09",
-    "download_url":  "https://github.com/tienhoaa/AV_Releases/releases/download/v1.0.6/AVTools_latest.zip",
-    "url":  "https://github.com/tienhoaa/AV_Releases/releases/download/v1.0.6/AVTools_latest.zip",
-    "changelog":  "Ban v1.0.6: Hoan thien Engine San Nen V3 ban dia (100% Native C#) - Khac phuc triet de loi TypeInitializationException / InvalidProgramException va popup dang nhap, ho tro day du 32 lenh San Nen, tu dong dong bo RibbonManifest.",
-    "notes":  "Ban v1.0.6: Hoan thien Engine San Nen V3 ban dia (100% Native C#) - Khac phuc triet de loi TypeInitializationException / InvalidProgramException va popup dang nhap, ho tro day du 32 lenh San Nen, tu dong dong bo RibbonManifest.",
-    "sha256":  "84c0385cde6bf597c7a976c33130e13053126d733554839fafc32c078c8d18fd"
+  "version": "1.0.6",
+  "release_date": "2026-11-09",
+  "releaseDate": "2026-11-09",
+  "download_url": "https://github.com/tienhoaa/AV_Releases/releases/download/v1.0.6/AVTools_latest.zip",
+  "downloadUrl": "https://github.com/tienhoaa/AV_Releases/releases/download/v1.0.6/AVTools_latest.zip",
+  "url": "https://github.com/tienhoaa/AV_Releases/releases/download/v1.0.6/AVTools_latest.zip",
+  "changelog": "- Tối ưu San Nền V3 hoàn chỉnh, không phụ thuộc cloud login\r\n- Tự động dọn dẹp file rác .old khi cập nhật",
+  "notes": "- Tối ưu San Nền V3 hoàn chỉnh, không phụ thuộc cloud login\r\n- Tự động dọn dẹp file rác .old khi cập nhật",
+  "changelog_array": [
+    "Tối ưu San Nền V3 hoàn chỉnh, không phụ thuộc cloud login",
+    "Tự động dọn dẹp file rác .old khi cập nhật"
+  ],
+  "minCadVersion": "2021",
+  "isCritical": false,
+  "sha256": "84c0385cde6bf597c7a976c33130e13053126d733554839fafc32c078c8d18fd"
 }
