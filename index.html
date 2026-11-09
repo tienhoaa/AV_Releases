@@ -485,6 +485,12 @@
               </button>
             </div>
 
+            <button type="button" onclick="switchTab('registry')" 
+              class="w-full py-2.5 px-3 bg-brand-500/15 hover:bg-brand-500/25 active:bg-brand-500/30 text-brand-300 text-xs sm:text-sm font-semibold rounded-xl border border-brand-500/30 flex items-center justify-center gap-2 transition cursor-pointer">
+              <i data-lucide="users" class="w-4 h-4"></i>
+              <span>Xem Trong Danh Sách Quản Lý License</span>
+            </button>
+
             <!-- Inspect Signature Details toggle -->
             <button type="button" onclick="toggleInspector()" 
               class="w-full text-center py-1.5 text-xs text-slate-500 hover:text-slate-300 flex items-center justify-center gap-1 cursor-pointer">
@@ -1053,6 +1059,10 @@ oQIDAQAB
         if (t === tabId) {
           sec?.classList.remove('hidden');
           if (t === 'settings') loadGitHubConfig();
+          if (t === 'registry') {
+            renderRegistryTable();
+            fetchOnlineRegistry();
+          }
           // Desktop nav styling
           navD?.classList.add('bg-brand-500/15', 'text-brand-300', 'border-brand-500/30');
           navD?.classList.remove('text-slate-400', 'hover:bg-slate-800');
@@ -1248,7 +1258,7 @@ oQIDAQAB
           }
         }
       });
-      fetchOnlineRegistry();
+      renderRegistryTable();
     }
 
     function populateRequestData(data) {
@@ -1967,6 +1977,19 @@ oQIDAQAB
 
     // ==================== REALTIME ONLINE GITHUB REGISTRY CLOUD ====================
     let isSyncingRegistry = false;
+    let pendingRegistrySync = false;
+    let syncRegistryTimer = null;
+
+    function queuePushRegistryToGitHub() {
+      if (syncRegistryTimer) clearTimeout(syncRegistryTimer);
+      syncRegistryTimer = setTimeout(async () => {
+        if (isSyncingRegistry) {
+          pendingRegistrySync = true;
+          return;
+        }
+        await pushRegistryToGitHub();
+      }, 350);
+    }
 
     async function fetchOnlineRegistry(showNotice = false) {
       const cfg = getStoredGitHubConfig();
@@ -1984,11 +2007,22 @@ oQIDAQAB
         if (res.ok) {
           const cloudList = await res.json();
           if (Array.isArray(cloudList)) {
-            localStorage.setItem(STORAGE_KEY_REGISTRY, JSON.stringify(cloudList));
-            fetchOnlineRegistry();
+            const localList = getStoredRegistry();
+            const map = new Map();
+            localList.forEach(item => {
+              if (item && item.payload && item.payload.license_id) map.set(item.payload.license_id, item);
+            });
+            cloudList.forEach(item => {
+              if (item && item.payload && item.payload.license_id && !map.has(item.payload.license_id)) {
+                map.set(item.payload.license_id, item);
+              }
+            });
+            const merged = Array.from(map.values());
+            localStorage.setItem(STORAGE_KEY_REGISTRY, JSON.stringify(merged));
+            renderRegistryTable();
             if (statusText) statusText.innerText = 'Lưu Online (GitHub)';
             if (showNotice) showToast('Đã đồng bộ danh sách khách hàng từ GitHub Online!', 'success');
-            return cloudList;
+            return merged;
           }
         }
       } catch (err) {
@@ -1996,7 +2030,7 @@ oQIDAQAB
       }
 
       if (statusText) statusText.innerText = 'Lưu Online (GitHub)';
-      fetchOnlineRegistry();
+      renderRegistryTable();
       return getStoredRegistry();
     }
 
@@ -2052,14 +2086,22 @@ oQIDAQAB
 
         if (putRes.ok) {
           if (statusText) statusText.innerText = 'Lưu Online (GitHub)';
+          showToast('Đã tự động đồng bộ danh sách License lên GitHub!', 'success');
         } else {
+          const errData = await putRes.json().catch(() => ({}));
+          console.error('GitHub API error:', errData);
           if (statusText) statusText.innerText = 'Lỗi lưu Cloud';
+          showToast('Lỗi lưu GitHub: ' + (errData.message || putRes.statusText), 'error');
         }
       } catch (err) {
         console.error('Lỗi khi đẩy registry lên GitHub:', err);
         if (statusText) statusText.innerText = 'Lỗi lưu Cloud';
       } finally {
         isSyncingRegistry = false;
+        if (pendingRegistrySync) {
+          pendingRegistrySync = false;
+          queuePushRegistryToGitHub();
+        }
         if (window.lucide) lucide.createIcons();
       }
     }
@@ -2069,9 +2111,9 @@ oQIDAQAB
       const filtered = list.filter(item => item.payload.license_id !== lic.payload.license_id);
       filtered.unshift(lic);
       localStorage.setItem(STORAGE_KEY_REGISTRY, JSON.stringify(filtered));
-      fetchOnlineRegistry();
+      renderRegistryTable();
       // Tự động đẩy lưu Online lên GitHub
-      pushRegistryToGitHub(filtered);
+      queuePushRegistryToGitHub();
     }
 
     function renderRegistryTable() {
@@ -2289,7 +2331,8 @@ oQIDAQAB
       item.payload.status = 'revoked';
       item.payload.revoked_at = new Date().toISOString();
       localStorage.setItem(STORAGE_KEY_REGISTRY, JSON.stringify(list));
-      fetchOnlineRegistry();
+      renderRegistryTable();
+      queuePushRegistryToGitHub();
       showToast(`Đã thu hồi giấy phép ${licenseId}`, 'warning');
 
       // Check auto-sync GitHub
@@ -2307,7 +2350,8 @@ oQIDAQAB
       item.payload.status = 'active';
       delete item.payload.revoked_at;
       localStorage.setItem(STORAGE_KEY_REGISTRY, JSON.stringify(list));
-      fetchOnlineRegistry();
+      renderRegistryTable();
+      queuePushRegistryToGitHub();
       showToast(`Đã khôi phục hoạt động cho ${licenseId}`, 'success');
 
       const cfg = getStoredGitHubConfig();
@@ -2321,7 +2365,8 @@ oQIDAQAB
       let list = getStoredRegistry();
       list = list.filter(x => x.payload.license_id !== licenseId);
       localStorage.setItem(STORAGE_KEY_REGISTRY, JSON.stringify(list));
-      fetchOnlineRegistry();
+      renderRegistryTable();
+      queuePushRegistryToGitHub();
       showToast('Đã xóa bản ghi.', 'info');
     }
 
@@ -2355,7 +2400,8 @@ oQIDAQAB
           });
 
           localStorage.setItem(STORAGE_KEY_REGISTRY, JSON.stringify(existing));
-          fetchOnlineRegistry();
+          renderRegistryTable();
+          queuePushRegistryToGitHub();
           showToast(`Đã khôi phục thêm ${count} giấy phép vào hệ thống!`, 'success');
         } catch (err) {
           showToast('Lỗi khi đọc file sao lưu: ' + err.message, 'error');
