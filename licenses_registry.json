@@ -1,1 +1,32 @@
-[]
+[
+  {
+    "version": "1.0",
+    "payload": {
+      "license_id": "LIC-20261109005726-AHFP",
+      "product": "AV_Civil",
+      "software_code": "AV_CIVIL",
+      "customer_name": "hoacty",
+      "company": "Cá nhân",
+      "machine_name": "PC",
+      "phone": "",
+      "hwid": "AV-A365-9F61-F15B-BC2D",
+      "hardware_id": "AV-A365-9F61-F15B-BC2D",
+      "modules": [
+        "ALL"
+      ],
+      "license_type": "Permanent",
+      "issued_date": "2026-11-09T00:57:26.831Z",
+      "valid_from": "2026-11-09T00:57:26.831Z",
+      "expiry_date": "9999-12-31",
+      "update_expiry_date": "9999-12-31",
+      "expiry": "PERPETUAL",
+      "is_permanent": true,
+      "max_cad_version": "ALL",
+      "notes": "Full License Perpetual",
+      "status": "active"
+    },
+    "signature": "BySlNpLjY+0HrjFoMND3F4Klg6yi8o2y/ZtDBx6+aQX235tJMixVRyLVG8CvBloTJJLh18+uaWTALriO9EPNgKelKkCWBhvc6rnvUrCr14SlshCHmvQHzlVcyEqqGJIW2ZyB7YtrN9S6fmWtRYSPy/epNbNKffq1ffsHYKxmmnD2RuaWKgLBTrJQixFWzr0ffDcua2DH/uJMeGcWJWVVy+xphcN59V8zuwU/psmfoZvkk6Mn6Wi5z7C5YfwzQmiK4mPvOtrkPZUqRV65QtIsbpMb8+9+XMeTncvUB50L09Vhre/TsL16u6Ow+w450d2wBlDo0TnVKUPdEaPKsDyWFw==",
+    "fileName": "AVCivil_License_hoacty_BC2D.avlic",
+    "fileContent": "{\n  \"version\": \"1.0\",\n  \"signature_algorithm\": \"RSA-SHA256\",\n  \"algorithm\": \"RSASSA-PKCS1-v1_5-SHA256\",\n  \"payload\": \"{\\\"license_id\\\":\\\"LIC-20261109005726-AHFP\\\",\\\"product\\\":\\\"AV_Civil\\\",\\\"software_code\\\":\\\"AV_CIVIL\\\",\\\"customer_name\\\":\\\"hoacty\\\",\\\"company\\\":\\\"Cá nhân\\\",\\\"machine_name\\\":\\\"PC\\\",\\\"phone\\\":\\\"\\\",\\\"hwid\\\":\\\"AV-A365-9F61-F15B-BC2D\\\",\\\"hardware_id\\\":\\\"AV-A365-9F61-F15B-BC2D\\\",\\\"modules\\\":[\\\"ALL\\\"],\\\"license_type\\\":\\\"Permanent\\\",\\\"issued_date\\\":\\\"2026-11-09T00:57:26.831Z\\\",\\\"valid_from\\\":\\\"2026-11-09T00:57:26.831Z\\\",\\\"expiry_date\\\":\\\"9999-12-31\\\",\\\"update_expiry_date\\\":\\\"9999-12-31\\\",\\\"expiry\\\":\\\"PERPETUAL\\\",\\\"is_permanent\\\":true,\\\"max_cad_version\\\":\\\"ALL\\\",\\\"notes\\\":\\\"Full License Perpetual\\\",\\\"status\\\":\\\"active\\\"}\",\n  \"signature\": \"BySlNpLjY+0HrjFoMND3F4Klg6yi8o2y/ZtDBx6+aQX235tJMixVRyLVG8CvBloTJJLh18+uaWTALriO9EPNgKelKkCWBhvc6rnvUrCr14SlshCHmvQHzlVcyEqqGJIW2ZyB7YtrN9S6fmWtRYSPy/epNbNKffq1ffsHYKxmmnD2RuaWKgLBTrJQixFWzr0ffDcua2DH/uJMeGcWJWVVy+xphcN59V8zuwU/psmfoZvkk6Mn6Wi5z7C5YfwzQmiK4mPvOtrkPZUqRV65QtIsbpMb8+9+XMeTncvUB50L09Vhre/TsL16u6Ow+w450d2wBlDo0TnVKUPdEaPKsDyWFw==\"\n}"
+  }
+]
