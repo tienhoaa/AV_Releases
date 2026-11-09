@@ -2,6 +2,36 @@
   {
     "version": "1.0",
     "payload": {
+      "license_id": "LIC-20261109021541-V49X",
+      "product": "AVRoad 2026 (TDT 9.1)",
+      "software_code": "AVROAD_TDT91",
+      "customer_name": "GAMING-PC",
+      "company": "Cá nhân",
+      "machine_name": "PC",
+      "phone": "",
+      "hwid": "AV-A365-9F61-F15B-BC2D",
+      "hardware_id": "AV-A365-9F61-F15B-BC2D",
+      "modules": [
+        "ALL"
+      ],
+      "license_type": "Permanent",
+      "issued_date": "2026-11-09T02:15:41.218Z",
+      "valid_from": "2026-11-09T02:15:41.218Z",
+      "expiry_date": "9999-12-31",
+      "update_expiry_date": "9999-12-31",
+      "expiry": "PERPETUAL",
+      "is_permanent": true,
+      "max_cad_version": "ALL",
+      "notes": "Full License Perpetual",
+      "status": "active"
+    },
+    "signature": "EXLyIzRmvMV5nTsmHL5x1RTwynIaXSDA9TPzsQ/zJ7hEQICqeiiOYBHaOBkb7+uAqeNDhWHNuuyNd/rmNCDABqo9nDf/SW+SSc1OGBrblSkEIOsh1AdkHI7wZQ/yZ/JEzfWK4w5G1ovuBktIvi0W3kyvAeBvbLOIRzkki1xi7fa6Iqc9Y2VlwekwaVLjfvjHQCv5vV/IiN6HmzhAvpEXlWg7ZpVmDXjRD+pCGFiAH6VkS57x8jTaiLVwv78hIaQWWqpz3bS0kgyptiZ4d4y/F42HAQ9tFYK05QFOWRja4IahqAqwY++IJXI4/OULruAUncDDGzmKMq8nWiCfar1t9w==",
+    "fileName": "AVRoad_License_GAMING_PC_BC2D.avlic",
+    "fileContent": "{\n  \"version\": \"1.0\",\n  \"signature_algorithm\": \"RSA-SHA256\",\n  \"algorithm\": \"RSASSA-PKCS1-v1_5-SHA256\",\n  \"payload\": \"{\\\"license_id\\\":\\\"LIC-20261109021541-V49X\\\",\\\"product\\\":\\\"AVRoad 2026 (TDT 9.1)\\\",\\\"software_code\\\":\\\"AVROAD_TDT91\\\",\\\"customer_name\\\":\\\"GAMING-PC\\\",\\\"company\\\":\\\"Cá nhân\\\",\\\"machine_name\\\":\\\"PC\\\",\\\"phone\\\":\\\"\\\",\\\"hwid\\\":\\\"AV-A365-9F61-F15B-BC2D\\\",\\\"hardware_id\\\":\\\"AV-A365-9F61-F15B-BC2D\\\",\\\"modules\\\":[\\\"ALL\\\"],\\\"license_type\\\":\\\"Permanent\\\",\\\"issued_date\\\":\\\"2026-11-09T02:15:41.218Z\\\",\\\"valid_from\\\":\\\"2026-11-09T02:15:41.218Z\\\",\\\"expiry_date\\\":\\\"9999-12-31\\\",\\\"update_expiry_date\\\":\\\"9999-12-31\\\",\\\"expiry\\\":\\\"PERPETUAL\\\",\\\"is_permanent\\\":true,\\\"max_cad_version\\\":\\\"ALL\\\",\\\"notes\\\":\\\"Full License Perpetual\\\",\\\"status\\\":\\\"active\\\"}\",\n  \"signature\": \"EXLyIzRmvMV5nTsmHL5x1RTwynIaXSDA9TPzsQ/zJ7hEQICqeiiOYBHaOBkb7+uAqeNDhWHNuuyNd/rmNCDABqo9nDf/SW+SSc1OGBrblSkEIOsh1AdkHI7wZQ/yZ/JEzfWK4w5G1ovuBktIvi0W3kyvAeBvbLOIRzkki1xi7fa6Iqc9Y2VlwekwaVLjfvjHQCv5vV/IiN6HmzhAvpEXlWg7ZpVmDXjRD+pCGFiAH6VkS57x8jTaiLVwv78hIaQWWqpz3bS0kgyptiZ4d4y/F42HAQ9tFYK05QFOWRja4IahqAqwY++IJXI4/OULruAUncDDGzmKMq8nWiCfar1t9w==\"\n}"
+  },
+  {
+    "version": "1.0",
+    "payload": {
       "license_id": "LIC-20261109005726-AHFP",
       "product": "AV_Civil",
       "software_code": "AV_CIVIL",
