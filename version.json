@@ -3,7 +3,7 @@
   "release_date": "2026-11-09",
   "download_url": "https://github.com/tienhoaa/AV_Releases/releases/download/v1.0.3/AVTools_latest.zip",
   "url": "https://github.com/tienhoaa/AV_Releases/releases/download/v1.0.3/AVTools_latest.zip",
-  "changelog": "Phiên bản v1.0.3: Sửa triệt để lỗi menu ngữ cảnh ẩn AutoCAD (Block Editor, Hatch Creation...), mặc định kích hoạt tab AV Road, tối ưu thanh Ribbon.",
+  "changelog": "Bản v1.0.3: Mặc định hiển thị full 100% menu khi netload, chọn sẵn tab AV Road, sửa triệt để tab contextual ẩn.",
   "notes": "Phiên bản v1.0.3: Sửa triệt để lỗi menu ngữ cảnh ẩn AutoCAD (Block Editor, Hatch Creation...), mặc định kích hoạt tab AV Road, tối ưu thanh Ribbon.",
-  "sha256": "2426d243b839104ce4380f56fe0c5e62d73f3667f2e3ff7006e26d163314724c"
+  "sha256": "07f1386f0d3e5feaa65627a85b911c70510191e3a8f3f9ee1663e1938982a9e6"
 }
