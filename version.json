@@ -5,5 +5,5 @@
   "url": "https://github.com/tienhoaa/AV_Releases/releases/download/v1.0.5/AVTools_latest.zip",
   "changelog": "Bản v1.0.5: Tích hợp bật/tắt riêng biệt từng tab của V3Tools (Civil, Cad, BIM, TCGT), mặc định hiển thị đầy đủ menu khi netload, bảo vệ tuyệt đối tab mặc định Civil 3D.",
   "notes": "Bản v1.0.5: Tích hợp bật/tắt riêng biệt từng tab của V3Tools (Civil, Cad, BIM, TCGT), mặc định hiển thị đầy đủ menu khi netload, bảo vệ tuyệt đối tab mặc định Civil 3D.",
-  "sha256": "7d1e0cfd5a4e384f7bd5a786b46a797be5449cd92a6289556926a39d46edbfd5"
+  "sha256": "bb2fd1878060354375349a3feff4251e048d7a32c017bc2104787157e9023c6f"
 }
