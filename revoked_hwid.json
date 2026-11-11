@@ -1,5 +1,7 @@
 {
-  "version": "1.0.0",
-  "updated_at": "2026-11-08",
-  "revoked_hwids": []
+  "updated_at": "2026-11-11T09:20:35.559Z",
+  "version": "1.0",
+  "description": "AV Civil 3D - Danh sách thiết bị phần cứng (HWID) bị thu hồi",
+  "total_revoked": 0,
+  "revoked_hwids": {}
 }
